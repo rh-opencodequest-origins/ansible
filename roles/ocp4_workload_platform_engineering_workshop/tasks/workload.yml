@@ -27,17 +27,33 @@
 - name: Install RHDH GitOps
   ansible.builtin.include_tasks: rhdh_gitops.yml
 
-- name: Install Red Hat Developer Hub
+- name: Install multiple Red Hat Developer Hub instances
   ansible.builtin.include_tasks: redhat_developer_hub.yml
+  loop:
+    - ocp4_workload_platform_engineering_workshop_rhdh_name: rhdh-instance1
+      ocp4_workload_platform_engineering_workshop_rhdh_namespace: rhdh-instance1
+      ocp4_workload_platform_engineering_workshop_rhdh_argo_application_name: rhdh-instance1-bootstrap
+      ocp4_workload_platform_engineering_workshop_rhbk_client_backstage_name: rhdh-instance1
+    - ocp4_workload_platform_engineering_workshop_rhdh_name: rhdh-instance2
+      ocp4_workload_platform_engineering_workshop_rhdh_namespace: rhdh-instance2
+      ocp4_workload_platform_engineering_workshop_rhdh_argo_application_name: rhdh-instance2-bootstrap
+      ocp4_workload_platform_engineering_workshop_rhbk_client_backstage_name: rhdh-instance2
+  loop_control:
+    loop_var: rhdh_instance
+  vars:
+    ocp4_workload_platform_engineering_workshop_rhdh_namespace: "{{ rhdh_instance.ocp4_workload_platform_engineering_workshop_rhdh_namespace }}"
+    ocp4_workload_platform_engineering_workshop_rhdh_argo_application_name: "{{ rhdh_instance.ocp4_workload_platform_engineering_workshop_rhdh_argo_application_name }}"
+    ocp4_workload_platform_engineering_workshop_rhdh_name: "{{ rhdh_instance.ocp4_workload_platform_engineering_workshop_rhdh_name }}"
+    ocp4_workload_platform_engineering_workshop_rhbk_client_backstage_name: "{{ rhdh_instance.ocp4_workload_platform_engineering_workshop_rhbk_client_backstage_name }}"
 
 - name: Install Trusted Artifact Signer
   ansible.builtin.include_tasks: trusted_artifact_signer.yml
 
-- name: Install Parasol
-  ansible.builtin.include_tasks: parasol.yml
+# - name: Install Parasol
+#   ansible.builtin.include_tasks: parasol.yml
 
-- name: Install Orchestrator
-  ansible.builtin.include_tasks: orchestrator.yml
+# - name: Install Orchestrator
+#   ansible.builtin.include_tasks: orchestrator.yml
 
 - name: Print Common Password
   agnosticd_user_info:

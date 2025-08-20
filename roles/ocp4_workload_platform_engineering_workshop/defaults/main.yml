@@ -233,6 +233,8 @@ ocp4_workload_platform_engineering_workshop_rhbk_max_time_to_wait: 600000
 
 ocp4_workload_platform_engineering_workshop_rhbk_realm_backstage_name: backstage
 
+
+# clients
 ocp4_workload_platform_engineering_workshop_rhbk_client_backstage_secret:
   "{{ lookup('ansible.builtin.password', '/tmp/passwordfile-client-backstage', chars=['ascii_letters', 'digits'], length=32) }}"
 
@@ -240,6 +242,17 @@ ocp4_workload_platform_engineering_workshop_rhbk_client_backstage_plugin_name:
   "{{ ocp4_workload_platform_engineering_workshop_rhbk_realm_backstage_name }}-plugin"
 ocp4_workload_platform_engineering_workshop_rhbk_client_backstage_plugin_secret:
   "{{ lookup('ansible.builtin.password', '/tmp/passwordfile-client-backstage-plugin', chars=['ascii_letters', 'digits'], length=32) }}"
+
+ocp4_workload_platform_engineering_workshop_rhbk_clients:
+  - id: backstage
+    name: "{{ ocp4_workload_platform_engineering_workshop_rhbk_client_backstage_name }}"
+    secret: "{{ ocp4_workload_platform_engineering_workshop_rhbk_client_backstage_secret }}"
+  - id: rhdh-instance1
+    name: rhdh-instance1
+    secret: "{{ ocp4_workload_platform_engineering_workshop_rhbk_client_backstage_secret }}"
+  - id: rhdh-instance2
+    name: rhdh-instance2
+    secret: "{{ ocp4_workload_platform_engineering_workshop_rhbk_client_backstage_secret }}"
 
 ocp4_workload_platform_engineering_workshop_rhbk_user_password: "{{ common_password }}"
 

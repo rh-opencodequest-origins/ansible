@@ -40,20 +40,25 @@ spec:
             host: {{ ocp4_workload_platform_engineering_workshop_rhbk_host }}.{{ r_openshift_subdomain }}
           ingress:
             enabled: {{ ocp4_workload_platform_engineering_workshop_rhbk_external_access }}
+
         keycloak-realm-import:
           keycloak:
             name: {{ ocp4_workload_platform_engineering_workshop_rhbk_cr_name }}
           realm:
             name: {{ ocp4_workload_platform_engineering_workshop_rhbk_realm_backstage_name }}
-          client:
-            backstage:
-              name: {{ ocp4_workload_platform_engineering_workshop_rhbk_client_backstage_name }}
-              redirectUri: {{ _backstage_redirect_url }}
-              webOrigin: {{ _backstage_web_origin }}
-              secret: {{ ocp4_workload_platform_engineering_workshop_rhbk_client_backstage_secret }}
+          backstageClient:
             backstagePlugin:
               name: {{ ocp4_workload_platform_engineering_workshop_rhbk_client_backstage_plugin_name }}
               secret: {{ ocp4_workload_platform_engineering_workshop_rhbk_client_backstage_plugin_secret }}
+              redirectUri: ""
+              webOrigin: ""
+{% for client in ocp4_workload_platform_engineering_workshop_rhbk_clients %}
+            {{ client.id }}:
+              name: {{ client.name }}
+              secret: {{ client.secret }}
+              redirectUri: "https://backstage-{{ client.name }}.{{ r_openshift_subdomain }}/api/auth/oidc/handler/frame"
+              webOrigin: "https://backstage-{{ client.name }}.{{ r_openshift_subdomain }}"
+{% endfor %}
           users:
             password: {{ ocp4_workload_platform_engineering_workshop_rhbk_user_password }}
 

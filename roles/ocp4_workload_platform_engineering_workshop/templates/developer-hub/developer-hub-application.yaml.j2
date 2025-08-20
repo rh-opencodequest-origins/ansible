@@ -33,6 +33,7 @@ spec:
     helm:
       valuesObject:
         redhat-developer-hub-prereqs:
+          nameOverride: {{ ocp4_workload_platform_engineering_workshop_rhdh_name }}
           backstage:
             oauth:
               clientId: {{ ocp4_workload_platform_engineering_workshop_rhbk_client_backstage_name }}
@@ -48,6 +49,7 @@ spec:
             orchestrator:
               token: {{ ocp4_workload_platform_engineering_workshop_rhdh_orchestrator_token }}
         redhat-developer-hub-config-template:
+          nameOverride: {{ ocp4_workload_platform_engineering_workshop_rhdh_name }}
           gitlab:
             rootPassword: {{ ocp4_workload_platform_engineering_workshop_gitlab_config_root_password }}
             host: {{ ocp4_workload_platform_engineering_workshop_gitlab_config_host }}
@@ -69,10 +71,16 @@ spec:
             subdomain: {{ r_openshift_subdomain }}
           orchestrator:
             sonataFlowDataIndexService: sonataflow-platform-data-index-service.{{ ocp4_workload_platform_engineering_workshop_orchestrator_namespace }}
+          rhdh:
+            template:
+              group: {{ ocp4_workload_platform_engineering_workshop_rhdh_name }}
         redhat-developer-hub-application:
+          nameOverride: {{ ocp4_workload_platform_engineering_workshop_rhdh_name }}
           gitops:
             namespace: {{ ocp4_workload_platform_engineering_workshop_rhdh_argo_application_namespace }}
           helm:
             values:
               git:
                 host: {{ ocp4_workload_platform_engineering_workshop_gitlab_config_host }}
+                group: {{ ocp4_workload_platform_engineering_workshop_rhdh_name }}
+                # revision: {{ ocp4_workload_platform_engineering_workshop_rhdh_name }}
