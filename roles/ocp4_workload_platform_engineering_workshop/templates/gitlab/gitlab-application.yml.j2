@@ -12,6 +12,104 @@ spec:
   project: default
   source:
     helm:
+      values: |
+        gitlab:
+          users:
+            users:
+              - id: dev1
+              - id: dev2
+              - id: pe1
+              - id: pe2
+{% for g in (opencodequest.clusters | selectattr('name','equalto', cluster) | first).groups %}
+{% for u in g.users %}
+              - id: {{ u }}-dev
+              - id: {{ u }}-pe
+{% endfor %}
+{% endfor %}
+            password: 
+
+          groups:
+            # --- static groups ---
+            - name: devteam1
+              repo: []
+              users:
+                - id: dev1
+                - id: dev2
+
+            - name: global
+              repo:
+                - name: global-techdocs
+                  url: https://github.com/rh-opencodequest-origins/global-techdocs.git
+              users:
+                - id: dev1
+                - id: dev2
+                - id: pe1
+                - id: pe2
+
+            - name: rhdh
+              repo:
+                - name: template-quarkus-simple
+                  url: https://github.com/rh-opencodequest-origins/rhdh-template-quarkus-simple.git
+                - name: parasol-store-dev-template
+                  url: https://github.com/rh-opencodequest-origins/parasol-store-dev-templates.git
+                - name: developer-hub-config
+                  url: https://github.com/rh-opencodequest-origins/developer-hub-config.git
+                - name: import-existing-app-template
+                  url: https://github.com/rh-opencodequest-origins/import-existing-app-template.git
+                - name: import-existing-api-template
+                  url: https://github.com/rh-opencodequest-origins/import-api-template.git
+                - name: rhdh-entities
+                  url: https://github.com/rh-opencodequest-origins/pe-workshop-entities.git
+                - name: template-developer-self-service
+                  url: https://github.com/rh-opencodequest-origins/rhdh-template-developer-self-service.git
+                - name: orchestrator-workflows
+                  url: https://github.com/rh-opencodequest-origins/orchestrator-workflows.git
+              users:
+                - id: pe1
+                - id: pe2
+              project:
+                - name: rhdh-issues
+                  labels:
+                    - name: approved
+                      color: green
+                    - name: denied
+                      color: red
+            # --- dynamic groups from cluster vars ---
+{% for g in (opencodequest.clusters | selectattr('name','equalto', cluster) | first).groups %}
+            - name: {{ g.name }}
+              repo:
+                - name: template-quarkus-simple
+                  url: https://github.com/rh-opencodequest-origins/rhdh-template-quarkus-simple.git
+                - name: parasol-store-dev-template
+                  url: https://github.com/rh-opencodequest-origins/parasol-store-dev-templates.git
+                - name: developer-hub-config
+                  url: https://github.com/rh-opencodequest-origins/developer-hub-config.git
+                - name: import-existing-app-template
+                  url: https://github.com/rh-opencodequest-origins/import-existing-app-template.git
+                - name: import-existing-api-template
+                  url: https://github.com/rh-opencodequest-origins/import-api-template.git
+                - name: rhdh-entities
+                  url: https://github.com/rh-opencodequest-origins/pe-workshop-entities.git
+                - name: template-developer-self-service
+                  url: https://github.com/rh-opencodequest-origins/rhdh-template-developer-self-service.git
+                - name: orchestrator-workflows
+                  url: https://github.com/rh-opencodequest-origins/orchestrator-workflows.git
+                - name: opencodequest-templates
+                  url: https://github.com/rh-opencodequest-origins/opencodequest-templates.git
+              users:
+{% for u in g.users %}
+                - id: {{ u }}-dev
+                - id: {{ u }}-pe
+{% endfor %}
+              project:
+                - name: rhdh-issues
+                  labels:
+                    - name: approved
+                      color: green
+                    - name: denied
+                      color: red
+{% endfor %}
+
       parameters:
         - name: gitlab.smtp.host
           value: "{{ ocp4_workload_platform_engineering_workshop_gitlab_config_smtp_host }}"

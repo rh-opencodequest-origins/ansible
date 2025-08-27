@@ -1,0 +1,17 @@
+#
+# Open Code Quest
+#
+opencodequest:
+  clusters:
+    - name: central
+      groups:
+        - name: team1
+          users: [ "redgua", "oracle", "misango" ]
+        - name: team2
+          users: [ "penance", "hesh", "shockwa" ]
+        - name: team3
+          users: [ "blackl" , "adawon" , "wonder"]
+        - name: team4
+          users: [ "newtsc" , "jonatha" , "ironsp"]
+        - name: team5
+          users: [ "tigra" , "cloak" , "aquagir"]

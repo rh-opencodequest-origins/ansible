@@ -73,7 +73,7 @@ spec:
             sonataFlowDataIndexService: sonataflow-platform-data-index-service.{{ ocp4_workload_platform_engineering_workshop_orchestrator_namespace }}
           rhdh:
             template:
-              group: {{ ocp4_workload_platform_engineering_workshop_rhdh_name }}
+              group: {{ ocp4_workload_platform_engineering_workshop_rhdh_groupname }}
         redhat-developer-hub-application:
           nameOverride: {{ ocp4_workload_platform_engineering_workshop_rhdh_name }}
           gitops:
@@ -82,5 +82,5 @@ spec:
             values:
               git:
                 host: {{ ocp4_workload_platform_engineering_workshop_gitlab_config_host }}
-                group: {{ ocp4_workload_platform_engineering_workshop_rhdh_name }}
+                group: {{ ocp4_workload_platform_engineering_workshop_rhdh_groupname }}
                 # revision: {{ ocp4_workload_platform_engineering_workshop_rhdh_name }}

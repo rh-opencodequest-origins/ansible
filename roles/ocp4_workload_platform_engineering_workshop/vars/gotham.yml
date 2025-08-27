@@ -1,0 +1,17 @@
+#
+# Open Code Quest
+#
+opencodequest:
+  clusters:
+    - name: atlantis
+      groups:
+        - name: team1
+          users: [ "rubeus", "johnwr", "howard" ]
+        - name: team2
+          users: [ "niteow2", "blackp", "moondra" ]
+        - name: team3
+          users: [ "captainam" , "saria" , "fi"]
+        - name: team4
+          users: [ "rachel" , "mercury" , "thepun"]
+        - name: team5
+          users: [ "bishop" , "hogun" , "tempera"]

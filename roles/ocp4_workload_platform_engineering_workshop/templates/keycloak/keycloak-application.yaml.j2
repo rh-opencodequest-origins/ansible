@@ -46,19 +46,68 @@ spec:
             name: {{ ocp4_workload_platform_engineering_workshop_rhbk_cr_name }}
           realm:
             name: {{ ocp4_workload_platform_engineering_workshop_rhbk_realm_backstage_name }}
+
           backstageClient:
             backstagePlugin:
               name: {{ ocp4_workload_platform_engineering_workshop_rhbk_client_backstage_plugin_name }}
               secret: {{ ocp4_workload_platform_engineering_workshop_rhbk_client_backstage_plugin_secret }}
               redirectUri: ""
               webOrigin: ""
-{% for client in ocp4_workload_platform_engineering_workshop_rhbk_clients %}
-            {{ client.id }}:
-              name: {{ client.name }}
-              secret: {{ client.secret }}
-              redirectUri: "https://backstage-{{ client.name }}.{{ r_openshift_subdomain }}/api/auth/oidc/handler/frame"
-              webOrigin: "https://backstage-{{ client.name }}.{{ r_openshift_subdomain }}"
+            backstage:
+              name: backstage
+              secret: "{{ ocp4_workload_platform_engineering_workshop_rhbk_client_backstage_secret }}"
+              redirectUri: "https://backstage-backstage.{{ r_openshift_subdomain }}/api/auth/oidc/handler/frame"
+              webOrigin: "https://backstage-backstage.{{ r_openshift_subdomain }}"
+{% for g in (opencodequest.clusters | selectattr('name','equalto', cluster) | first).groups %}
+            rhdh-{{ g.name }}:
+              name: rhdh-{{ g.name }}
+              secret: "{{ ocp4_workload_platform_engineering_workshop_rhbk_client_backstage_secret }}"
+              redirectUri: "https://backstage-rhdh-{{ g.name }}.{{ r_openshift_subdomain }}/api/auth/oidc/handler/frame"
+              webOrigin: "https://backstage-rhdh-{{ g.name }}.{{ r_openshift_subdomain }}"
 {% endfor %}
           users:
+            users:
+              - id: dev1      
+                groups:
+                  - developers
+                  - devteam
+              - id: dev2
+                groups:
+                  - developers
+                  - devteam
+              - id: pe1
+                groups:
+                  - platformengineers
+                  - rhdh
+              - id: pe2
+                groups:
+                  - platformengineers
+                  - rhdh
+              - id: pipeline
+                groups:
+                  - infrastructure
+{% for g in (opencodequest.clusters | selectattr('name','equalto', cluster) | first).groups %}
+{% for u in g.users %}
+              - id: {{ u }}-dev
+                groups:
+                  - developers
+                  - dev{{ g.name }}
+              - id: {{ u }}-pe
+                groups:
+                  - pe{{ g.name }}
+                  - rhdh
+{% endfor %}
+{% endfor %}
+
             password: {{ ocp4_workload_platform_engineering_workshop_rhbk_user_password }}
 
+          groups:
+            - name: developers
+            - name: rhdh
+            - name: infrastructure
+            - name: platformengineers
+            - name: devteam
+{% for g in (opencodequest.clusters | selectattr('name','equalto', cluster) | first).groups %}
+            - name: dev{{ g.name }}
+            - name: pe{{ g.name }}
+{% endfor %}

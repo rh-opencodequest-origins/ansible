@@ -15,6 +15,12 @@
 - name: Install External Secrets
   ansible.builtin.include_tasks: external_secrets.yml
 
+# Multiple RHDHs if cluster is defined
+- name: Load cluster vars
+  ansible.builtin.include_vars:
+    file: "vars/{{ cluster }}.yml"
+  when: cluster is defined
+
 - name: Install Gitlab
   ansible.builtin.include_tasks: gitlab.yml
 
@@ -27,24 +33,26 @@
 - name: Install RHDH GitOps
   ansible.builtin.include_tasks: rhdh_gitops.yml
 
+# Single RHDH install if cluster is not defined
+- name: Install Red Hat Developer Hub
+  ansible.builtin.include_tasks: redhat_developer_hub.yml
+  when: cluster is not defined
+  vars:
+    ocp4_workload_platform_engineering_workshop_rhdh_name: rhdh
+
+# Multiple RHDHs if cluster is defined
 - name: Install multiple Red Hat Developer Hub instances
   ansible.builtin.include_tasks: redhat_developer_hub.yml
-  loop:
-    - ocp4_workload_platform_engineering_workshop_rhdh_name: rhdh-instance1
-      ocp4_workload_platform_engineering_workshop_rhdh_namespace: rhdh-instance1
-      ocp4_workload_platform_engineering_workshop_rhdh_argo_application_name: rhdh-instance1-bootstrap
-      ocp4_workload_platform_engineering_workshop_rhbk_client_backstage_name: rhdh-instance1
-    - ocp4_workload_platform_engineering_workshop_rhdh_name: rhdh-instance2
-      ocp4_workload_platform_engineering_workshop_rhdh_namespace: rhdh-instance2
-      ocp4_workload_platform_engineering_workshop_rhdh_argo_application_name: rhdh-instance2-bootstrap
-      ocp4_workload_platform_engineering_workshop_rhbk_client_backstage_name: rhdh-instance2
+  loop: "{{ (opencodequest.clusters | selectattr('name','equalto', cluster) | first).groups }}"
   loop_control:
-    loop_var: rhdh_instance
+    loop_var: group
   vars:
-    ocp4_workload_platform_engineering_workshop_rhdh_namespace: "{{ rhdh_instance.ocp4_workload_platform_engineering_workshop_rhdh_namespace }}"
-    ocp4_workload_platform_engineering_workshop_rhdh_argo_application_name: "{{ rhdh_instance.ocp4_workload_platform_engineering_workshop_rhdh_argo_application_name }}"
-    ocp4_workload_platform_engineering_workshop_rhdh_name: "{{ rhdh_instance.ocp4_workload_platform_engineering_workshop_rhdh_name }}"
-    ocp4_workload_platform_engineering_workshop_rhbk_client_backstage_name: "{{ rhdh_instance.ocp4_workload_platform_engineering_workshop_rhbk_client_backstage_name }}"
+    ocp4_workload_platform_engineering_workshop_rhdh_name: "rhdh-{{ group.name }}"
+    ocp4_workload_platform_engineering_workshop_rhdh_groupname: "{{ group.name }}"
+    ocp4_workload_platform_engineering_workshop_rhdh_namespace: "rhdh-{{ group.name }}"
+    ocp4_workload_platform_engineering_workshop_rhdh_argo_application_name: "rhdh-{{ group.name }}-bootstrap"
+    ocp4_workload_platform_engineering_workshop_rhbk_client_backstage_name: "rhdh-{{ group.name }}"
+  when: cluster is defined
 
 - name: Install Trusted Artifact Signer
   ansible.builtin.include_tasks: trusted_artifact_signer.yml

@@ -243,16 +243,16 @@ ocp4_workload_platform_engineering_workshop_rhbk_client_backstage_plugin_name:
 ocp4_workload_platform_engineering_workshop_rhbk_client_backstage_plugin_secret:
   "{{ lookup('ansible.builtin.password', '/tmp/passwordfile-client-backstage-plugin', chars=['ascii_letters', 'digits'], length=32) }}"
 
-ocp4_workload_platform_engineering_workshop_rhbk_clients:
-  - id: backstage
-    name: "{{ ocp4_workload_platform_engineering_workshop_rhbk_client_backstage_name }}"
-    secret: "{{ ocp4_workload_platform_engineering_workshop_rhbk_client_backstage_secret }}"
-  - id: rhdh-instance1
-    name: rhdh-instance1
-    secret: "{{ ocp4_workload_platform_engineering_workshop_rhbk_client_backstage_secret }}"
-  - id: rhdh-instance2
-    name: rhdh-instance2
-    secret: "{{ ocp4_workload_platform_engineering_workshop_rhbk_client_backstage_secret }}"
+# ocp4_workload_platform_engineering_workshop_rhbk_clients:
+#   - id: backstage
+#     name: "{{ ocp4_workload_platform_engineering_workshop_rhbk_client_backstage_name }}"
+#     secret: "{{ ocp4_workload_platform_engineering_workshop_rhbk_client_backstage_secret }}"
+#   - id: rhdh-instance1
+#     name: rhdh-instance1
+#     secret: "{{ ocp4_workload_platform_engineering_workshop_rhbk_client_backstage_secret }}"
+#   - id: rhdh-instance2
+#     name: rhdh-instance2
+#     secret: "{{ ocp4_workload_platform_engineering_workshop_rhbk_client_backstage_secret }}"
 
 ocp4_workload_platform_engineering_workshop_rhbk_user_password: "{{ common_password }}"
 
@@ -321,6 +321,7 @@ ocp4_workload_platform_engineering_workshop_rhdh_gitops_password: "{{ common_pas
 ocp4_workload_platform_engineering_workshop_rhdh_argo_application_name: backstage-bootstrap
 ocp4_workload_platform_engineering_workshop_rhdh_argo_application_namespace: openshift-gitops
 ocp4_workload_platform_engineering_workshop_rhdh_namespace: backstage
+ocp4_workload_platform_engineering_workshop_rhdh_groupname: rhdh
 
 ocp4_workload_platform_engineering_workshop_rhdh_helm_repo: https://github.com/rh-opencodequest-origins/helm.git
 ocp4_workload_platform_engineering_workshop_rhdh_helm_repo_tag: bootstrap-orchestrator

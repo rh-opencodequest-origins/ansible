@@ -1,0 +1,17 @@
+#
+# Open Code Quest
+#
+opencodequest:
+  clusters:
+    - name: madripoor
+      groups:
+        - name: team1
+          users: [ "masong", "yorick", "sokka" ]
+        - name: team2
+          users: [ "cypher", "lucian", "iron" ]
+        - name: team3
+          users: [ "hellboy" , "bixcal" , "wonderg"]
+        - name: team4
+          users: [ "resista" , "sydney" , "cliffju"]
+        - name: team5
+          users: [ "theque" , "ironfi" , "henryj"]

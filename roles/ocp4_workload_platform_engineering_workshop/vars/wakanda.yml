@@ -1,0 +1,17 @@
+#
+# Open Code Quest
+#
+opencodequest:
+  clusters:
+    - name: wakanda
+      groups:
+        - name: team1
+          users: [ "harriso", "wildcat", "ericaj" ]
+        - name: team2
+          users: [ "blackw", "spring", "doctor" ]
+        - name: team3
+          users: [ "echo" , "sergean" , "turanga"]
+        - name: team4
+          users: [ "alinap" , "revali" , "delphyn"]
+        - name: team5
+          users: [ "alfred" , "fordpi" , "bumi"]
