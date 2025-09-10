@@ -90,11 +90,11 @@ spec:
 {% for u in g.users %}
               - id: {{ u }}-dev
                 groups:
-                  - developers
                   - dev{{ g.name }}
               - id: {{ u }}-pe
                 groups:
                   - pe{{ g.name }}
+                  - dev{{ g.name }}
                   - rhdh
 {% endfor %}
 {% endfor %}

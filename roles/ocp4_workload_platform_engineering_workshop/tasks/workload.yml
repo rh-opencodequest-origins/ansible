@@ -15,6 +15,9 @@
 - name: Install External Secrets
   ansible.builtin.include_tasks: external_secrets.yml
 
+- name: Install DevSpaces
+  ansible.builtin.include_tasks: devspaces.yml
+
 # Multiple RHDHs if cluster is defined
 - name: Load cluster vars
   ansible.builtin.include_vars:
@@ -29,6 +32,7 @@
 
 - name: Install Quay
   ansible.builtin.include_tasks: quay.yml
+  when: cluster is not defined
 
 - name: Install RHDH GitOps
   ansible.builtin.include_tasks: rhdh_gitops.yml
@@ -48,7 +52,7 @@
     loop_var: group
   vars:
     ocp4_workload_platform_engineering_workshop_rhdh_name: "rhdh-{{ group.name }}"
-    ocp4_workload_platform_engineering_workshop_rhdh_groupname: "{{ group.name }}"
+    ocp4_workload_platform_engineering_workshop_rhdh_groupname: "pe{{ group.name }}"
     ocp4_workload_platform_engineering_workshop_rhdh_namespace: "rhdh-{{ group.name }}"
     ocp4_workload_platform_engineering_workshop_rhdh_argo_application_name: "rhdh-{{ group.name }}-bootstrap"
     ocp4_workload_platform_engineering_workshop_rhbk_client_backstage_name: "rhdh-{{ group.name }}"
@@ -57,11 +61,29 @@
 - name: Install Trusted Artifact Signer
   ansible.builtin.include_tasks: trusted_artifact_signer.yml
 
+- name: Install Sonarqube
+  ansible.builtin.include_tasks: sonarqube.yml
+
 # - name: Install Parasol
 #   ansible.builtin.include_tasks: parasol.yml
 
 # - name: Install Orchestrator
 #   ansible.builtin.include_tasks: orchestrator.yml
+
+- name: Create vault secret for stackrox
+  kubernetes.core.k8s_exec:
+    namespace: "{{ ocp4_workload_platform_engineering_workshop_vault_namespace }}"
+    pod: vault-0
+    command: "vault kv put kv/secrets/rhdh/stackrox token={{
+     ocp4_workload_platform_engineering_workshop_stackrox_token }}"
+
+- name: Create vault secret for common password
+  kubernetes.core.k8s_exec:
+    namespace: "{{ ocp4_workload_platform_engineering_workshop_vault_namespace }}"
+    pod: vault-0
+    command: "vault kv put kv/secrets/rhdh/common_password password={{
+     common_password }}"
+
 
 - name: Print Common Password
   agnosticd_user_info:

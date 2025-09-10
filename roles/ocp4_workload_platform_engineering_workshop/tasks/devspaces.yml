@@ -1,0 +1,19 @@
+---
+- name: Write DevSpaces Application manifest
+  template:
+    src: 'devspaces/devspaces-application.yaml.j2'
+    dest: /tmp/devspaces-application.yaml
+
+- name: Create DevSpaces application
+  kubernetes.core.k8s:
+    state: present
+    definition: "{{ lookup('template', 'devspaces/devspaces-application.yaml.j2') | from_yaml }}"
+  retries: 10
+  delay: 30
+  ignore_errors: true
+  register: devspaces_result
+  until: devspaces_result is not failed
+
+- name: Print devspaces_result from the previous task
+  ansible.builtin.debug:
+    var: devspaces_result

@@ -243,18 +243,23 @@ ocp4_workload_platform_engineering_workshop_rhbk_client_backstage_plugin_name:
 ocp4_workload_platform_engineering_workshop_rhbk_client_backstage_plugin_secret:
   "{{ lookup('ansible.builtin.password', '/tmp/passwordfile-client-backstage-plugin', chars=['ascii_letters', 'digits'], length=32) }}"
 
-# ocp4_workload_platform_engineering_workshop_rhbk_clients:
-#   - id: backstage
-#     name: "{{ ocp4_workload_platform_engineering_workshop_rhbk_client_backstage_name }}"
-#     secret: "{{ ocp4_workload_platform_engineering_workshop_rhbk_client_backstage_secret }}"
-#   - id: rhdh-instance1
-#     name: rhdh-instance1
-#     secret: "{{ ocp4_workload_platform_engineering_workshop_rhbk_client_backstage_secret }}"
-#   - id: rhdh-instance2
-#     name: rhdh-instance2
-#     secret: "{{ ocp4_workload_platform_engineering_workshop_rhbk_client_backstage_secret }}"
 
 ocp4_workload_platform_engineering_workshop_rhbk_user_password: "{{ common_password }}"
+
+
+# ------------------------------------------------
+# Red Hat OpenShift Dev Spaces
+# ------------------------------------------------
+
+ocp4_workload_platform_engineering_workshop_devspaces_application_name: devspaces
+ocp4_workload_platform_engineering_workshop_devspaces_application_namespace: openshift-gitops
+ocp4_workload_platform_engineering_workshop_devspaces_gitops_repo: https://github.com/rh-opencodequest-origins/helm.git
+ocp4_workload_platform_engineering_workshop_devspaces_gitops_repo_path: devspaces
+ocp4_workload_platform_engineering_workshop_devspaces_gitops_repo_tag: devspaces
+ocp4_workload_platform_engineering_workshop_devspaces_namespace: openshift-devspaces
+
+
+
 
 # ------------------------------------------------
 # Quay
@@ -372,3 +377,19 @@ ocp4_workload_platform_engineering_workshop_orchestrator_namespace: orchestrator
 ocp4_workload_platform_engineering_workshop_orchestrator_gitops_repo: https://github.com/rh-opencodequest-origins/helm.git
 ocp4_workload_platform_engineering_workshop_orchestrator_gitops_repo_tag: orchestrator
 ocp4_workload_platform_engineering_workshop_orchestrator_gitops_repo_path: orchestrator
+
+
+# ------------------------------------------------
+# Sonaqube
+# ------------------------------------------------
+ocp4_workload_platform_engineering_workshop_sonarqube_application_name: sonarqube
+ocp4_workload_platform_engineering_workshop_sonarqube_application_namespace: openshift-gitops
+ocp4_workload_platform_engineering_workshop_sonarqube_namespace: sonarqube
+ocp4_workload_platform_engineering_workshop_sonarqube_gitops_repo: https://github.com/rh-opencodequest-origins/agnosticg.git
+ocp4_workload_platform_engineering_workshop_sonarqube_gitops_repo_tag: orchestrator
+ocp4_workload_platform_engineering_workshop_sonarqube_gitops_repo_path: charts/sonarqube
+ocp4_workload_platform_engineering_workshop_sonarqube_name: sonarqube
+
+
+
+ocp4_workload_platform_engineering_workshop_stackrox_token: eyJhbGciOiJSUzI1NiIsImtpZCI6Imp3dGswIiwidHlwIjoiSldUIn0.eyJFeHBpcmVBdCI6bnVsbCwiYXVkIjoiaHR0cHM6Ly9zdGFja3JveC5pby9qd3Qtc291cmNlcyNhcGktdG9rZW5zIiwiZXhwIjoxNzg4ODY4ODMwLCJpYXQiOjE3NTczMzI4MzAsImlzcyI6Imh0dHBzOi8vc3RhY2tyb3guaW8vand0IiwianRpIjoiMTVmOWUyY2UtOWFjMy00NmU4LWE0OTQtZDU3OGJmMDQzYzI4IiwibmFtZSI6InNlY3VyZWQtY2x1c3RlciIsInJvbGVzIjpbIkNvbnRpbnVvdXMgSW50ZWdyYXRpb24iXX0.hnWHkGPzWxS57k66_Z69_EiOs_n8DUehSm3CjTDesmbfvowPH1-cOCbjLvuEkwFxrROs9Oj3AzUeQuTIMEcMckoO0TqmMmHTIi0H_TrdM4gi2cihg5G-bRaTj1Fn4eOZoCGKWkv2qC8W-G9tFqjf2Ta3SlD9XSeOIDvs7Ze1l0X3iIIG0coAYXeQxZ1PmQMXl-g-z8nsecBMRDa3_fIN6XpCzqElzQcN70VfwUkilHpJneOnv5O1y2_oKEHEMvUPQi5z-9lI5mQ0m-jwxqMqaEcvIKw6nxeymUqkYpL1SFAbpz_TR8fxPJDdEtHESKgQqPtMk-hBwxI60EZNwARFMuy16nRozlrMR2lbX5YumbWyXsOGmJwv6MXFyT2S4_ZfNnX8hvbD81qKFR_mCSMm6cQCYHEIUELfT2yvCRc7v0MK5tMfvqNpdo1abdeZbH6ckP0k780CB5WE6sKJ97U3Vk6YD0MjVT6GwsKxNFrLy6FMUMnJpQ-LH_UlunoTFQH81fURIBHfZ69nN45ITmrYFQtCbazyvLiLQCb3qXBd-w70JV1lHtSgYwYWAE6ZiTWetCOrwzPA6saP41mHKi-pcf9gAjKULM8_BlJcH0fJ3iIAVGIbEpzHi3m8LLmLB_OtkocHvPfc4I4goEZ_n6Ka2DY9CVwv5_fcW9rEcdP84oI

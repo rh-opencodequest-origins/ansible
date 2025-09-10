@@ -3,15 +3,15 @@
 #
 opencodequest:
   clusters:
-    - name: atlantis
+    - name: gotham
       groups:
         - name: team1
-          users: [ "rubeus", "johnwr", "howard" ]
+          users: [ "reedri", "bethany", "babygr" ]
         - name: team2
-          users: [ "niteow2", "blackp", "moondra" ]
+          users: [ "rocket", "jonsno", "lightsp" ]
         - name: team3
-          users: [ "captainam" , "saria" , "fi"]
+          users: [ "captain" , "coleyo" , "mariah"]
         - name: team4
-          users: [ "rachel" , "mercury" , "thepun"]
+          users: [ "niteow" , "morita" , "sprite"]
         - name: team5
-          users: [ "bishop" , "hogun" , "tempera"]
+          users: [ "reaper" , "shatter" , "acegri"]

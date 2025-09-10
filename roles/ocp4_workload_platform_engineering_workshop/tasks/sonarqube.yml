@@ -1,0 +1,14 @@
+---
+- name: Create Sonarqube application
+  kubernetes.core.k8s:
+    state: present
+    definition: "{{ lookup('template', 'sonarqube/sonarqube-application.yaml.j2') | from_yaml }}"
+  retries: 10
+  delay: 30
+  ignore_errors: true
+  register: sonarqube_result
+  until: sonarqube_result is not failed
+
+- name: Print sonarqube_result from the previous task
+  ansible.builtin.debug:
+    var: sonarqube_result

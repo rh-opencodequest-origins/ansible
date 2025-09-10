@@ -1,9 +1,4 @@
 ---
-- name: Write GitLab Application manifest
-  template:
-    src: 'gitlab/gitlab-application.yml.j2'
-    dest: /tmp/gitlab-application.yaml
-
 - name: Create GitLab application
   kubernetes.core.k8s:
     state: present

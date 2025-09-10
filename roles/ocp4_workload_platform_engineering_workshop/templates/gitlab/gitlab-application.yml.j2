@@ -14,6 +14,66 @@ spec:
     helm:
       values: |
         gitlab:
+
+          templates:
+            - group: rhdh
+              project: template-quarkus-simple
+              branch: main
+              templates:
+                - template.yaml
+            - group: rhdh
+              project: import-existing-app-template
+              branch: main
+              templates:
+                - template.yaml
+            - group: rhdh
+              project: import-existing-api-template
+              branch: main
+              templates:
+                - template.yaml
+            - group: global
+              project: global-techdocs
+              branch: main
+              templates:
+                - catalog-info.yaml
+                - mkdocs.yaml
+            - group: rhdh
+              project: template-developer-self-service
+              branch: main
+              templates:
+                - postgres15/template.yaml
+                - namespace/template-small.yaml
+                - namespace/template-medium.yaml
+                - namespace/template-large.yaml
+            - group: rhdh
+              project: orchestrator-workflows
+              branch: main
+              templates:
+                - manifests/greeting/application.yaml
+                - manifests/create-ocp-namespace-swt/application.yaml
+{% for g in (opencodequest.clusters | selectattr('name','equalto', cluster) | first).groups %}
+            - group: pe{{ g.name }}
+              project: template-quarkus-simple
+              branch: main
+              templates:
+                - template.yaml
+            - group: pe{{ g.name }}
+              project: opencodequest-templates
+              branch: main
+              templates:
+                - scaffolder-templates/opencodequest-templates.yaml
+                - scaffolder-templates/fight-ui/template.yaml
+                - scaffolder-templates/quarkus-ai/template.yaml
+                - scaffolder-templates/quarkus-postgresql/template.yaml
+                - scaffolder-templates/quarkus-with-spring-postgresql/template.yaml
+            - group: pe{{ g.name }}
+              project: rhdh-entities
+              branch: main
+              templates:
+                - systems/opencodequest-system.yaml
+                - domains/domain-opencodequest.yaml
+{% endfor %}
+
           users:
             users:
               - id: dev1
@@ -22,15 +82,15 @@ spec:
               - id: pe2
 {% for g in (opencodequest.clusters | selectattr('name','equalto', cluster) | first).groups %}
 {% for u in g.users %}
-              - id: {{ u }}-dev
               - id: {{ u }}-pe
+              - id: {{ u }}-dev
 {% endfor %}
 {% endfor %}
             password: 
 
           groups:
             # --- static groups ---
-            - name: devteam1
+            - name: devteam
               repo: []
               users:
                 - id: dev1
@@ -76,7 +136,7 @@ spec:
                       color: red
             # --- dynamic groups from cluster vars ---
 {% for g in (opencodequest.clusters | selectattr('name','equalto', cluster) | first).groups %}
-            - name: {{ g.name }}
+            - name: pe{{ g.name }}
               repo:
                 - name: template-quarkus-simple
                   url: https://github.com/rh-opencodequest-origins/rhdh-template-quarkus-simple.git
@@ -98,7 +158,6 @@ spec:
                   url: https://github.com/rh-opencodequest-origins/opencodequest-templates.git
               users:
 {% for u in g.users %}
-                - id: {{ u }}-dev
                 - id: {{ u }}-pe
 {% endfor %}
               project:
@@ -109,6 +168,25 @@ spec:
                     - name: denied
                       color: red
 {% endfor %}
+
+{% for g in (opencodequest.clusters | selectattr('name','equalto', cluster) | first).groups %}
+            - name: dev{{ g.name }}
+              repo: [] 
+              users:
+{% for u in g.users %}
+                - id: {{ u }}-dev
+{% endfor %}
+
+              project:
+                - name: rhdh-issues
+                  labels:
+                    - name: approved
+                      color: green
+                    - name: denied
+                      color: red
+{% endfor %}
+
+
 
       parameters:
         - name: gitlab.smtp.host
