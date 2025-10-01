@@ -1,0 +1,17 @@
+#
+# Open Code Quest
+#
+opencodequest:
+  clusters:
+    - name: metropolis
+      groups:
+        - name: team1
+          users: [ "spider", "valkyri", "ironma" ]
+        - name: team2
+          users: [ "zuko", "batman", "double" ]
+        - name: team3
+          users: [ "billyl" , "cynthia" , "atom"]
+        - name: team4
+          users: [ "sonyab" , "coyote" , "jackbr"]
+        - name: team5
+          users: [ "greatk" , "kelpie" , "renaro"]

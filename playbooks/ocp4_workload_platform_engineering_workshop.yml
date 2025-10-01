@@ -1,6 +1,6 @@
 ---
 
-- name: Install Workshop
+- name: Install Infra Cluster
   hosts: localhost
   connection: local
   gather_facts: false

@@ -1,0 +1,19 @@
+---
+- name: Write ACS Secured Cluster Application manifest
+  template:
+    src: 'acs-securedcluster/acs-securedcluster.yaml.j2'
+    dest: /tmp/acs-securedcluster-application.yaml
+
+- name: Create ACS Secured Cluster application
+  kubernetes.core.k8s:
+    state: present
+    definition: "{{ lookup('template', 'securedcluster/acs-securedcluster.yaml.j2') | from_yaml }}"
+  retries: 10
+  delay: 30
+  ignore_errors: true
+  register: acs_secured_cluster_result
+  until: acs_secured_cluster_result is not failed
+
+- name: Print acs_secured_cluster_result from the previous task
+  ansible.builtin.debug:
+    var: acs_secured_cluster_result

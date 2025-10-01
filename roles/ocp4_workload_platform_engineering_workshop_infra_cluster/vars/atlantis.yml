@@ -10,7 +10,7 @@ opencodequest:
         - name: team2
           users: [ "niteow2", "blackp", "moondra" ]
         - name: team3
-          users: [ "captainam" , "saria" , "humanb"]
+          users: [ "captainam" , "saria" , "fi"]
         - name: team4
           users: [ "rachel" , "mercury" , "thepun"]
         - name: team5

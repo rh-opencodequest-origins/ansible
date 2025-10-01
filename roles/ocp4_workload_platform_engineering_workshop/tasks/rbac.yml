@@ -1,0 +1,13 @@
+- name: Create RBAC application
+  kubernetes.core.k8s:
+    state: present
+    definition: "{{ lookup('template', 'rbac/rbac-application.yaml.j2') | from_yaml }}"
+  retries: 10
+  delay: 30
+  ignore_errors: true
+  register: rbac_result
+  until: rhbh_result is not failed
+
+- name: Print rbac_result from the previous task
+  ansible.builtin.debug:
+    var: rbac_result

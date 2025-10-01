@@ -47,12 +47,6 @@ spec:
           realm:
             name: {{ ocp4_workload_platform_engineering_workshop_rhbk_realm_backstage_name }}
 
-          client:
-            openshift:
-              name: openshift
-              secret: {{ ocp4_workload_platform_engineering_workshop_rhbk_client_backstage_plugin_secret }}
-              redirectUri: "https://oauth-openshift.{{ r_openshift_subdomain }}/oauth2callback/*"
-              webOrigin: "https://oauth-openshift.{{ r_openshift_subdomain }}"
           backstageClient:
             backstagePlugin:
               name: {{ ocp4_workload_platform_engineering_workshop_rhbk_client_backstage_plugin_name }}

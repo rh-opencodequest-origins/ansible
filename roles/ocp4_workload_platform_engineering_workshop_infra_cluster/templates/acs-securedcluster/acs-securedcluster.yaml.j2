@@ -28,10 +28,5 @@ spec:
     targetRevision: {{ ocp4_workload_platform_engineering_workshop_devspaces_gitops_repo_tag }}
     path: {{ ocp4_workload_platform_engineering_workshop_devspaces_gitops_repo_path }}
     helm:
-      values: |
-        devspaces:
-          gitlab:
-            url: "https://{{ ocp4_workload_platform_engineering_workshop_gitlab_config_host }}"
-            oauthClientId: "{{ _gitlab_oauth_apps.devspaces.application_id }}"
-            oauthClientSecret: "{{ _gitlab_oauth_apps.devspaces.secret }}"
-          
+      values: 
+        

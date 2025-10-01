@@ -1,0 +1,58 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{ ocp4_worklod_platform_engineering_workshop_rbac_application_name }}
+  namespace: {{ ocp4_workload_platform_engineering_workshop_rbac_application_namespace }}
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io/foreground
+spec:
+  destination:
+    namespace: {{ ocp4_workload_platform_engineering_workshop_rbac_application_namespace }}
+    server: 'https://kubernetes.default.svc'
+  project: default
+  syncPolicy:
+    automated: {}
+    retry:
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 3m0s
+      limit: 10
+    syncOptions:
+      - CreateNamespace=true
+      - RespectIgnoreDifferences=true
+  source:
+    repoURL: {{ ocp4_workload_platform_engineering_workshop_rbac_gitops_repo }}
+    targetRevision: {{ ocp4_workload_platform_engineering_workshop_rbac_gitops_repo_tag }}
+    path: {{ ocp4_workload_platform_engineering_workshop_rbac_gitops_repo_path }}
+    helm:
+      values: |
+        rbac:
+{% for g in (opencodequest.clusters | selectattr('name','equalto', cluster) | first).groups %}
+            - namespace: showroom-{{ g.name }}
+              subjects:
+              - kind: Group
+                name: pe{{ g.name }}
+                role: view
+              - kind: Group
+                name: dev{{ g.name }}
+                role: view
+            - namespace: rhdh-{{ g.name }}
+              subjects:
+              - kind: Group
+                name: pe{{ g.name }}
+                role: edit
+              - kind: Group
+                name: dev{{ g.name }}
+                role: view
+{% for namespace in ocp4_workload_platform_engineering_workshop_rbac_view_namespaces %}
+            - namespace: {{ namespace }} 
+              subjects:
+              - kind: Group
+                name: pe{{ g.name }}
+                role: view
+              - kind: Group
+                name: dev{{ g.name }}
+                role: view
+{% endfor %}
+{% endfor %}

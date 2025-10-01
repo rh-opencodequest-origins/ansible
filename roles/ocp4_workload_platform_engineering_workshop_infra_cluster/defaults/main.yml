@@ -166,12 +166,6 @@ ocp4_workload_platform_engineering_workshop_openshift_gitops_resource_customizat
 
 ocp4_workload_platform_engineering_workshop_openshift_gitops_ignore_differences: {}
 
-ocp4_workload_platform_engineering_workshop_openshift_gitops_rbac_update: true
-
-ocp4_workload_platform_engineering_workshop_openshift_gitops_rbac_policy: |
-      g, cluster-admins, role:admin
-      g, system:authenticated, role:readonly
-
 # ------------------------------------------------
 # OpenShift Pipelines
 # ------------------------------------------------
@@ -219,12 +213,6 @@ ocp4_workload_platform_engineering_workshop_gitlab_config_host:
   "gitlab-{{ ocp4_workload_platform_engineering_workshop_gitlab_namespace }}.{{ r_openshift_subdomain }}"
 
 ocp4_workload_platform_engineering_workshop_gitlab_users_password: "{{ common_password }}"
-
-ocp4_workload_platform_engineering_workshop_gitlab_oauth_apps:
-  - name: devspaces
-    redirect_uri: "https://devspaces.{{ r_openshift_subdomain }}/api/oauth/callback"
-    scopes: "api read_user read_repository write_repository openid profile email"
-
 
 # ------------------------------------------------
 # Red Hat Build Of Keycloak
@@ -284,16 +272,17 @@ ocp4_workload_platform_engineering_workshop_quay_gitops_repo: https://github.com
 ocp4_workload_platform_engineering_workshop_quay_gitops_repo_tag: quay-vault
 ocp4_workload_platform_engineering_workshop_quay_gitops_repo_path: quay
 
-# If quay is deployed in another cluster
-ocp4_workload_platform_engineering_workshop_central_quay_host: quay.apps.cluster-vshl8.vshl8.sandbox5348.opentlc.com
-
-ocp4_workload_platform_engineering_workshop_quay_registry_host: "{{ ocp4_workload_platform_engineering_workshop_central_quay_host | default('quay.' + r_openshift_subdomain) }}"
-ocp4_workload_platform_engineering_workshop_quay_registry_project: "{{ cluster | default('quayadmin') }}"
+ocp4_workload_platform_engineering_workshop_quay_registry_host: "quay.{{ r_openshift_subdomain }}"
 ocp4_workload_platform_engineering_workshop_quay_admin_user: quayadmin
 ocp4_workload_platform_engineering_workshop_quay_admin_user_password: "{{ common_password }}"
 
 ocp4_workload_platform_engineering_workshop_quay_organizations:
-  - parasol
+  - atlantis
+  - metropolis
+  - wakanda
+  - gotham
+  - central
+  - madripoor
 
 # ------------------------------------------------
 # Vault
@@ -407,27 +396,5 @@ ocp4_workload_platform_engineering_workshop_sonarqube_gitops_repo_path: charts/s
 ocp4_workload_platform_engineering_workshop_sonarqube_name: sonarqube
 
 
-# ------------------------------------------------
-# ACS
-# ------------------------------------------------
+
 ocp4_workload_platform_engineering_workshop_stackrox_token: eyJhbGciOiJSUzI1NiIsImtpZCI6Imp3dGswIiwidHlwIjoiSldUIn0.eyJFeHBpcmVBdCI6bnVsbCwiYXVkIjoiaHR0cHM6Ly9zdGFja3JveC5pby9qd3Qtc291cmNlcyNhcGktdG9rZW5zIiwiZXhwIjoxNzg4ODY4ODMwLCJpYXQiOjE3NTczMzI4MzAsImlzcyI6Imh0dHBzOi8vc3RhY2tyb3guaW8vand0IiwianRpIjoiMTVmOWUyY2UtOWFjMy00NmU4LWE0OTQtZDU3OGJmMDQzYzI4IiwibmFtZSI6InNlY3VyZWQtY2x1c3RlciIsInJvbGVzIjpbIkNvbnRpbnVvdXMgSW50ZWdyYXRpb24iXX0.hnWHkGPzWxS57k66_Z69_EiOs_n8DUehSm3CjTDesmbfvowPH1-cOCbjLvuEkwFxrROs9Oj3AzUeQuTIMEcMckoO0TqmMmHTIi0H_TrdM4gi2cihg5G-bRaTj1Fn4eOZoCGKWkv2qC8W-G9tFqjf2Ta3SlD9XSeOIDvs7Ze1l0X3iIIG0coAYXeQxZ1PmQMXl-g-z8nsecBMRDa3_fIN6XpCzqElzQcN70VfwUkilHpJneOnv5O1y2_oKEHEMvUPQi5z-9lI5mQ0m-jwxqMqaEcvIKw6nxeymUqkYpL1SFAbpz_TR8fxPJDdEtHESKgQqPtMk-hBwxI60EZNwARFMuy16nRozlrMR2lbX5YumbWyXsOGmJwv6MXFyT2S4_ZfNnX8hvbD81qKFR_mCSMm6cQCYHEIUELfT2yvCRc7v0MK5tMfvqNpdo1abdeZbH6ckP0k780CB5WE6sKJ97U3Vk6YD0MjVT6GwsKxNFrLy6FMUMnJpQ-LH_UlunoTFQH81fURIBHfZ69nN45ITmrYFQtCbazyvLiLQCb3qXBd-w70JV1lHtSgYwYWAE6ZiTWetCOrwzPA6saP41mHKi-pcf9gAjKULM8_BlJcH0fJ3iIAVGIbEpzHi3m8LLmLB_OtkocHvPfc4I4goEZ_n6Ka2DY9CVwv5_fcW9rEcdP84oI
-ocp4_workload_platform_engineering_workshop_stackrox_endpoint: central-stackrox.apps.cluster-vshl8.vshl8.sandbox5348.opentlc.com:443
-
-
-# ------------------------------------------------
-# Showroom
-# ------------------------------------------------
-ocp4_workload_platform_engineering_workshop_showroom_application_name: showroom
-ocp4_workload_platform_engineering_workshop_showroom_gitops_repo: https://github.com/rh-opencodequest-origins/helm.git
-ocp4_workload_platform_engineering_workshop_showroom_gitops_repo_tag: bootstrap-orchestrator
-ocp4_workload_platform_engineering_workshop_showroom_gitops_repo_path: showroom
-
-#
-# RBAC 
-#
-ocp4_worklod_platform_engineering_workshop_rbac_application_name: rbac
-ocp4_workload_platform_engineering_workshop_rbac_application_namespace: openshift-gitops
-ocp4_workload_platform_engineering_workshop_rbac_gitops_repo: https://github.com/rh-opencodequest-origins/helm.git
-ocp4_workload_platform_engineering_workshop_rbac_gitops_repo_tag: orchestrator
-ocp4_workload_platform_engineering_workshop_rbac_gitops_repo_path: rbac
-ocp4_workload_platform_engineering_workshop_rbac_view_namespaces: [ "gitlab" , "openshift-gitops" , "rhdh-gitops" ]

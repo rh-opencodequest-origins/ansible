@@ -1,0 +1,48 @@
+---
+
+- name: Install OpenShift Gitops
+  ansible.builtin.include_tasks: openshift_gitops.yml
+
+- name: Install NooBaa
+  ansible.builtin.include_tasks: noobaa.yml
+  tags: install_nooba
+
+- name: Install Vault
+  ansible.builtin.include_tasks: vault.yml
+
+- name: Install External Secrets
+  ansible.builtin.include_tasks: external_secrets.yml
+  tags: install_external_secrets
+
+# - name: Install RHBK
+#   ansible.builtin.include_tasks: keycloak.yml
+
+- name: Install Quay
+  ansible.builtin.include_tasks: quay.yml
+
+# - name: Install Trusted Artifact Signer
+#   ansible.builtin.include_tasks: trusted_artifact_signer.yml
+
+# - name: Install Sonarqube
+#   ansible.builtin.include_tasks: sonarqube.yml
+
+# - name: Create vault secret for stackrox
+#   kubernetes.core.k8s_exec:
+#     namespace: "{{ ocp4_workload_platform_engineering_workshop_vault_namespace }}"
+#     pod: vault-0
+#     command: "vault kv put kv/secrets/rhdh/stackrox token={{
+#      ocp4_workload_platform_engineering_workshop_stackrox_token }}"
+
+# - name: Create vault secret for common password
+#   kubernetes.core.k8s_exec:
+#     namespace: "{{ ocp4_workload_platform_engineering_workshop_vault_namespace }}"
+#     pod: vault-0
+#     command: "vault kv put kv/secrets/rhdh/common_password password={{
+#      common_password }}"
+
+# - name: Print Common Password
+#   agnosticd_user_info:
+#     msg: "{{ item }}"
+#   loop:
+#     - ""
+#     - "password: {{ common_password }}"

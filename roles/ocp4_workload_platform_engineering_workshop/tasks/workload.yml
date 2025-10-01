@@ -2,40 +2,50 @@
 
 - name: Install OpenShift Gitops
   ansible.builtin.include_tasks: openshift_gitops.yml
+  tags: install_gitops
 
 - name: Install OpenShift Pipelines
   ansible.builtin.include_tasks: openshift_pipelines.yml
+  tags: install_pipelines
 
 - name: Install NooBaa
   ansible.builtin.include_tasks: noobaa.yml
+  tags: install_nooba
 
 - name: Install Vault
   ansible.builtin.include_tasks: vault.yml
+  tags: install_vault
 
 - name: Install External Secrets
   ansible.builtin.include_tasks: external_secrets.yml
-
-- name: Install DevSpaces
-  ansible.builtin.include_tasks: devspaces.yml
+  tags: install_external_secrets
 
 # Multiple RHDHs if cluster is defined
 - name: Load cluster vars
   ansible.builtin.include_vars:
     file: "vars/{{ cluster }}.yml"
   when: cluster is defined
+  tags: install_rhdh
 
 - name: Install Gitlab
   ansible.builtin.include_tasks: gitlab.yml
+  tags: install_gitlab
+
+- name: Install DevSpaces
+  ansible.builtin.include_tasks: devspaces.yml
+  tags: install_devspaces
 
 - name: Install RHBK
   ansible.builtin.include_tasks: keycloak.yml
+  tags: install_rhbk
 
-- name: Install Quay
-  ansible.builtin.include_tasks: quay.yml
-  when: cluster is not defined
+# - name: Install Quay
+#   ansible.builtin.include_tasks: quay.yml
+#   tags: install_quay
 
 - name: Install RHDH GitOps
   ansible.builtin.include_tasks: rhdh_gitops.yml
+  tags: install_rhdh_gitops
 
 # Single RHDH install if cluster is not defined
 - name: Install Red Hat Developer Hub
@@ -43,6 +53,7 @@
   when: cluster is not defined
   vars:
     ocp4_workload_platform_engineering_workshop_rhdh_name: rhdh
+  tags: install_rhdh
 
 # Multiple RHDHs if cluster is defined
 - name: Install multiple Red Hat Developer Hub instances
@@ -57,33 +68,31 @@
     ocp4_workload_platform_engineering_workshop_rhdh_argo_application_name: "rhdh-{{ group.name }}-bootstrap"
     ocp4_workload_platform_engineering_workshop_rhbk_client_backstage_name: "rhdh-{{ group.name }}"
   when: cluster is defined
+  tags: install_rhdh
 
 - name: Install Trusted Artifact Signer
   ansible.builtin.include_tasks: trusted_artifact_signer.yml
+  tags: instal_tas
 
 - name: Install Sonarqube
   ansible.builtin.include_tasks: sonarqube.yml
+  tags: install_sonarqube
 
-# - name: Install Parasol
-#   ansible.builtin.include_tasks: parasol.yml
+- name: Install Vault Secrets
+  ansible.builtin.include_tasks: vault_secrets.yml
+  tags: install_vault_secrets
 
-# - name: Install Orchestrator
-#   ansible.builtin.include_tasks: orchestrator.yml
+- name: Install Showroom documentation
+  ansible.builtin.include_tasks: showroom.yml
+  tags: instal_showroom
 
-- name: Create vault secret for stackrox
-  kubernetes.core.k8s_exec:
-    namespace: "{{ ocp4_workload_platform_engineering_workshop_vault_namespace }}"
-    pod: vault-0
-    command: "vault kv put kv/secrets/rhdh/stackrox token={{
-     ocp4_workload_platform_engineering_workshop_stackrox_token }}"
+- name: Update OpenShift Identity Provider
+  ansible.builtin.include_tasks: openshift_idp.yml
+  tags: install_openshift_idp
 
-- name: Create vault secret for common password
-  kubernetes.core.k8s_exec:
-    namespace: "{{ ocp4_workload_platform_engineering_workshop_vault_namespace }}"
-    pod: vault-0
-    command: "vault kv put kv/secrets/rhdh/common_password password={{
-     common_password }}"
-
+- name: Install RBAC Application for Rolebindings
+  ansible.builtin.include_tasks: rbac.yml
+  tags: install_rbac
 
 - name: Print Common Password
   agnosticd_user_info:

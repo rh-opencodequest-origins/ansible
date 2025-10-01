@@ -156,8 +156,6 @@ spec:
                   url: https://github.com/rh-opencodequest-origins/orchestrator-workflows.git
                 - name: opencodequest-templates
                   url: https://github.com/rh-opencodequest-origins/opencodequest-templates.git
-                - name: fullcodebase
-                  url: https://github.com/rh-opencodequest-origins/fullcodebase.git
               users:
 {% for u in g.users %}
                 - id: {{ u }}-pe
@@ -207,10 +205,6 @@ spec:
           value: {{ ocp4_workload_platform_engineering_workshop_rhdh_gitops_namespace }}
         - name: quay.host
           value: {{ ocp4_workload_platform_engineering_workshop_quay_registry_host }}
-        - name: quay.project
-          value: {{ ocp4_workload_platform_engineering_workshop_quay_registry_project }}
-        - name: stackrox.endpoint
-          value: {{ ocp4_workload_platform_engineering_workshop_stackrox_endpoint }}
         - name: vault.name
           value: {{ ocp4_workload_platform_engineering_workshop_vault_name }}
         - name: vault.namespace

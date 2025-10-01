@@ -1,0 +1,80 @@
+---
+- name: Create secret for RHSSO OAuth client
+  kubernetes.core.k8s:
+    definition:
+      apiVersion: v1
+      kind: Secret
+      metadata:
+        name: "openid-client-secret"
+        namespace: "openshift-config"
+      type: Opaque
+      data:
+        clientSecret: "{{ ocp4_workload_platform_engineering_workshop_rhbk_client_backstage_plugin_secret | b64encode }}"
+    state: present
+
+- name: Check if RHSSO identity provider exists in OAuth configuration
+  kubernetes.core.k8s_info:
+    api_version: config.openshift.io/v1
+    kind: OAuth
+    name: cluster
+  register: oauth_config
+
+- name: Extract existing identity provider names
+  set_fact:
+    existing_providers: "{{ oauth_config.resources[0].spec.identityProviders | default([]) | map(attribute='name') | list }}"
+
+- name: Display current identity providers
+  debug:
+    msg: "Existing identity providers: {{ existing_providers }}"
+
+- name: Add RHSSO identity provider using JSON patch
+  kubernetes.core.k8s_json_patch:
+    api_version: config.openshift.io/v1
+    kind: OAuth
+    name: cluster
+    patch:
+      - op: add
+        path: "/spec/identityProviders/-"
+        value:
+          name: "rhsso"
+          type: "OpenID"
+          mappingMethod: claim
+          openID:
+            claims:
+              email:
+                - email
+              groups:
+                - groups
+              name: 
+                - name
+              preferredUsername:
+                - preferred_username
+            clientID: "openshift"
+            clientSecret:
+              name: "openid-client-secret"
+            extraScopes: []
+            issuer: 'https://sso.{{ r_openshift_subdomain }}/realms/backstage'
+  register: oauth_patch_result
+  failed_when: 
+    - oauth_patch_result is failed
+    - '"must have a unique name" not in oauth_patch_result.msg'
+  when: "'rhsso' not in existing_providers"
+
+- name: Handle case where RHSSO already exists
+  debug:
+    msg: "RHSSO identity provider already exists, skipping addition"
+  when: 
+    - oauth_patch_result is defined
+    - oauth_patch_result is failed
+    - '"must have a unique name" in oauth_patch_result.msg'
+
+- name: Display final OAuth configuration
+  kubernetes.core.k8s_info:
+    api_version: config.openshift.io/v1
+    kind: OAuth
+    name: cluster
+  register: final_oauth_config
+
+- name: Show all configured identity providers
+  debug:
+    msg: "Final identity providers: {{ final_oauth_config.resources[0].spec.identityProviders | map(attribute='name') | list }}"

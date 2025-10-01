@@ -1,0 +1,17 @@
+#
+# Open Code Quest
+#
+opencodequest:
+  clusters:
+    - name: gotham
+      groups:
+        - name: team1
+          users: [ "reedri", "bethany", "babygr" ]
+        - name: team2
+          users: [ "rocket", "jonsno", "lightsp" ]
+        - name: team3
+          users: [ "captain" , "coleyo" , "mariah"]
+        - name: team4
+          users: [ "niteow" , "morita" , "sprite"]
+        - name: team5
+          users: [ "reaper" , "shatter" , "acegri"]
