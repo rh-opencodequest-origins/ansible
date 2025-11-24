@@ -412,9 +412,9 @@ ocp4_workload_platform_engineering_workshop_sonarqube_name: sonarqube
 # ------------------------------------------------
 # ACS
 # ------------------------------------------------
-ocp4_workload_platform_engineering_workshop_stackrox_token: eyJhbGciOiJSUzI1NiIsImtpZCI6Imp3dGswIiwidHlwIjoiSldUIn0.eyJFeHBpcmVBdCI6bnVsbCwiYXVkIjoiaHR0cHM6Ly9zdGFja3JveC5pby9qd3Qtc291cmNlcyNhcGktdG9rZW5zIiwiZXhwIjoxNzkxNTU5NTU1LCJpYXQiOjE3NjAwMjM1NTUsImlzcyI6Imh0dHBzOi8vc3RhY2tyb3guaW8vand0IiwianRpIjoiMzhiOGUxN2EtNjI3Mi00YmQ3LTk1NzUtZjY4NmQwMTIxYWI1IiwibmFtZSI6ImF0bGFudGlzLWNpIiwicm9sZXMiOlsiQ29udGludW91cyBJbnRlZ3JhdGlvbiJdfQ.GzvNQA4rmnASYFuRVMZenle9J2S3ZEBVsNg2pJhiiFa8i2uwHjSIN42FPxORJ4jhsy1BGw0oOuUpsd7OHPvi17aGcf_sQDDpuOy3W-781i_GEvd9TxU2xbSTE2D1HeEQUlroB35yg2EXFzZYw4o6hkW7S5FUDScel5wAYLQ7__t6a_hIKti0jUgs1mxJeSksWU0qEWz9u-UhVEPsrdscNE9XPB91tnRhxb5X28nAKNWG-GI_kCbHSgvafl6UU24sa8ET6AUUzku63t7iWvD0Yrv9kZvwU9pVdGykv8PIJ7BCecwTv43sV3_ZniUYPGOB2NOAHlm6YNEW4hR0J6f7IA39S-L8Iqz3GY8rC4LDAuMzmSqQGX2vuyFg5sOlpwlfiJ-cY5rgGKgcMv383yQzdUU0q6BzzHZwXDC2g1i9B8l_UiAKgwDXhITE2s9LnEFtG7Z2epGOljOVHQjy39BHlwybg44jKfe9qtIZtv0URkuwa23v48Z_SNqDXZWKKs0ljiEApoP6DZFqt8cgKG-DeSw1Ds2yIEvzaqrO1WX8vATLg5K1ck_6vLAT-ZRy6CIqbhug5I603uZbRJY-gKxX8S_d7TwKcvn2u9kl6-U2Ek7n_8Pud8Xm_K02bLfxr2frbZBdhuYobAYWQQtf_9NhxpM-lPt1RTWqh2Z1sGOlI0Q
+ocp4_workload_platform_engineering_workshop_stackrox_token: 
 
-ocp4_workload_platform_engineering_workshop_stackrox_endpoint: central-stackrox.apps.cluster-8sprz.8sprz.sandbox2184.opentlc.com:443
+ocp4_workload_platform_engineering_workshop_stackrox_endpoint:
 
 # ------------------------------------------------
 # Showroom
@@ -445,4 +445,4 @@ ocp4_workload_platform_engineering_workshop_rbac_view_namespaces: [ "gitlab" , "
 # ------------------------------------------------
 ocp4_worklod_platform_engineering_workshop_opencodequest_openai_url: https://granite-3-3-8b-instruct-maas-apicast-production.apps.prod.rhoai.rh-aiservices-bu.com:443/v1
 ocp4_worklod_platform_engineering_workshop_opencodequest_openai_model: granite-3-3-8b-instruct
-ocp4_worklod_platform_engineering_workshop_opencodequest_openai_key: a73314fb98ea71a92b4e93f4b234d877
+ocp4_worklod_platform_engineering_workshop_opencodequest_openai_key: xxx
