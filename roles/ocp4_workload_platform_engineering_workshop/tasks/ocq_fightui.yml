@@ -1,0 +1,27 @@
+---
+
+
+
+
+
+# - name: Create OpenCodeQuest Fight-UI applicationSet
+#   kubernetes.core.k8s:
+#     state: present
+#     definition: "{{ lookup('template', 'ocq_fightui/ocq_fightui-applicationSet.yaml.j2') | from_yaml }}"
+#   retries: 10
+#   delay: 30
+#   ignore_errors: true
+#   register: ocq_fightui_result
+#   until: ocq_fightui_result is not failed
+
+
+- name: Install OpenCodeQuest Fight-UI Applications
+  kubernetes.core.k8s:
+    state: present
+    definition: "{{ lookup('template', 'ocq_fightui/ocq_fightui-application.yaml.j2') }}"
+  retries: 10
+  delay: 30
+  ignore_errors: true
+  register: ocq_fightui_result
+  until: ocq_fightui_result is not failed
+

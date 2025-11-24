@@ -285,12 +285,14 @@ ocp4_workload_platform_engineering_workshop_quay_gitops_repo_tag: quay-vault
 ocp4_workload_platform_engineering_workshop_quay_gitops_repo_path: quay
 
 # If quay is deployed in another cluster
-ocp4_workload_platform_engineering_workshop_central_quay_host: quay.apps.cluster-vshl8.vshl8.sandbox5348.opentlc.com
+ocp4_workload_platform_engineering_workshop_central_quay_host: quay.apps.cluster-8sprz.8sprz.sandbox2184.opentlc.com
+ocp4_workload_platform_engineering_workshop_central_quay_admin_user: quayadmin
+ocp4_workload_platform_engineering_workshop_central_quay_admin_user_password: flqFFWKm
 
 ocp4_workload_platform_engineering_workshop_quay_registry_host: "{{ ocp4_workload_platform_engineering_workshop_central_quay_host | default('quay.' + r_openshift_subdomain) }}"
 ocp4_workload_platform_engineering_workshop_quay_registry_project: "{{ cluster | default('quayadmin') }}"
-ocp4_workload_platform_engineering_workshop_quay_admin_user: quayadmin
-ocp4_workload_platform_engineering_workshop_quay_admin_user_password: "{{ common_password }}"
+ocp4_workload_platform_engineering_workshop_quay_admin_user: "{{ ocp4_workload_platform_engineering_workshop_central_quay_admin_user | default('quayadmin') }}"
+ocp4_workload_platform_engineering_workshop_quay_admin_user_password: "{{ ocp4_workload_platform_engineering_workshop_central_quay_admin_user_password | default(common_password) }}"
 
 ocp4_workload_platform_engineering_workshop_quay_organizations:
   - parasol
@@ -410,9 +412,9 @@ ocp4_workload_platform_engineering_workshop_sonarqube_name: sonarqube
 # ------------------------------------------------
 # ACS
 # ------------------------------------------------
-ocp4_workload_platform_engineering_workshop_stackrox_token: eyJhbGciOiJSUzI1NiIsImtpZCI6Imp3dGswIiwidHlwIjoiSldUIn0.eyJFeHBpcmVBdCI6bnVsbCwiYXVkIjoiaHR0cHM6Ly9zdGFja3JveC5pby9qd3Qtc291cmNlcyNhcGktdG9rZW5zIiwiZXhwIjoxNzg4ODY4ODMwLCJpYXQiOjE3NTczMzI4MzAsImlzcyI6Imh0dHBzOi8vc3RhY2tyb3guaW8vand0IiwianRpIjoiMTVmOWUyY2UtOWFjMy00NmU4LWE0OTQtZDU3OGJmMDQzYzI4IiwibmFtZSI6InNlY3VyZWQtY2x1c3RlciIsInJvbGVzIjpbIkNvbnRpbnVvdXMgSW50ZWdyYXRpb24iXX0.hnWHkGPzWxS57k66_Z69_EiOs_n8DUehSm3CjTDesmbfvowPH1-cOCbjLvuEkwFxrROs9Oj3AzUeQuTIMEcMckoO0TqmMmHTIi0H_TrdM4gi2cihg5G-bRaTj1Fn4eOZoCGKWkv2qC8W-G9tFqjf2Ta3SlD9XSeOIDvs7Ze1l0X3iIIG0coAYXeQxZ1PmQMXl-g-z8nsecBMRDa3_fIN6XpCzqElzQcN70VfwUkilHpJneOnv5O1y2_oKEHEMvUPQi5z-9lI5mQ0m-jwxqMqaEcvIKw6nxeymUqkYpL1SFAbpz_TR8fxPJDdEtHESKgQqPtMk-hBwxI60EZNwARFMuy16nRozlrMR2lbX5YumbWyXsOGmJwv6MXFyT2S4_ZfNnX8hvbD81qKFR_mCSMm6cQCYHEIUELfT2yvCRc7v0MK5tMfvqNpdo1abdeZbH6ckP0k780CB5WE6sKJ97U3Vk6YD0MjVT6GwsKxNFrLy6FMUMnJpQ-LH_UlunoTFQH81fURIBHfZ69nN45ITmrYFQtCbazyvLiLQCb3qXBd-w70JV1lHtSgYwYWAE6ZiTWetCOrwzPA6saP41mHKi-pcf9gAjKULM8_BlJcH0fJ3iIAVGIbEpzHi3m8LLmLB_OtkocHvPfc4I4goEZ_n6Ka2DY9CVwv5_fcW9rEcdP84oI
-ocp4_workload_platform_engineering_workshop_stackrox_endpoint: central-stackrox.apps.cluster-vshl8.vshl8.sandbox5348.opentlc.com:443
+ocp4_workload_platform_engineering_workshop_stackrox_token: eyJhbGciOiJSUzI1NiIsImtpZCI6Imp3dGswIiwidHlwIjoiSldUIn0.eyJFeHBpcmVBdCI6bnVsbCwiYXVkIjoiaHR0cHM6Ly9zdGFja3JveC5pby9qd3Qtc291cmNlcyNhcGktdG9rZW5zIiwiZXhwIjoxNzkxNTU5NTU1LCJpYXQiOjE3NjAwMjM1NTUsImlzcyI6Imh0dHBzOi8vc3RhY2tyb3guaW8vand0IiwianRpIjoiMzhiOGUxN2EtNjI3Mi00YmQ3LTk1NzUtZjY4NmQwMTIxYWI1IiwibmFtZSI6ImF0bGFudGlzLWNpIiwicm9sZXMiOlsiQ29udGludW91cyBJbnRlZ3JhdGlvbiJdfQ.GzvNQA4rmnASYFuRVMZenle9J2S3ZEBVsNg2pJhiiFa8i2uwHjSIN42FPxORJ4jhsy1BGw0oOuUpsd7OHPvi17aGcf_sQDDpuOy3W-781i_GEvd9TxU2xbSTE2D1HeEQUlroB35yg2EXFzZYw4o6hkW7S5FUDScel5wAYLQ7__t6a_hIKti0jUgs1mxJeSksWU0qEWz9u-UhVEPsrdscNE9XPB91tnRhxb5X28nAKNWG-GI_kCbHSgvafl6UU24sa8ET6AUUzku63t7iWvD0Yrv9kZvwU9pVdGykv8PIJ7BCecwTv43sV3_ZniUYPGOB2NOAHlm6YNEW4hR0J6f7IA39S-L8Iqz3GY8rC4LDAuMzmSqQGX2vuyFg5sOlpwlfiJ-cY5rgGKgcMv383yQzdUU0q6BzzHZwXDC2g1i9B8l_UiAKgwDXhITE2s9LnEFtG7Z2epGOljOVHQjy39BHlwybg44jKfe9qtIZtv0URkuwa23v48Z_SNqDXZWKKs0ljiEApoP6DZFqt8cgKG-DeSw1Ds2yIEvzaqrO1WX8vATLg5K1ck_6vLAT-ZRy6CIqbhug5I603uZbRJY-gKxX8S_d7TwKcvn2u9kl6-U2Ek7n_8Pud8Xm_K02bLfxr2frbZBdhuYobAYWQQtf_9NhxpM-lPt1RTWqh2Z1sGOlI0Q
 
+ocp4_workload_platform_engineering_workshop_stackrox_endpoint: central-stackrox.apps.cluster-8sprz.8sprz.sandbox2184.opentlc.com:443
 
 # ------------------------------------------------
 # Showroom
@@ -422,12 +424,25 @@ ocp4_workload_platform_engineering_workshop_showroom_gitops_repo: https://github
 ocp4_workload_platform_engineering_workshop_showroom_gitops_repo_tag: bootstrap-orchestrator
 ocp4_workload_platform_engineering_workshop_showroom_gitops_repo_path: showroom
 
-#
+# ------------------------------------------------
+# OpenCodeQuest Fight-UI
+# ------------------------------------------------
+ocp4_workload_platform_engineering_workshop_ocq_fightui_application_name: fight-ui
+ocp4_workload_platform_engineering_workshop_ocq_fightui_application_namespace: rhdh-gitops
+
+# ------------------------------------------------
 # RBAC 
-#
+# ------------------------------------------------
 ocp4_worklod_platform_engineering_workshop_rbac_application_name: rbac
 ocp4_workload_platform_engineering_workshop_rbac_application_namespace: openshift-gitops
 ocp4_workload_platform_engineering_workshop_rbac_gitops_repo: https://github.com/rh-opencodequest-origins/helm.git
 ocp4_workload_platform_engineering_workshop_rbac_gitops_repo_tag: orchestrator
 ocp4_workload_platform_engineering_workshop_rbac_gitops_repo_path: rbac
 ocp4_workload_platform_engineering_workshop_rbac_view_namespaces: [ "gitlab" , "openshift-gitops" , "rhdh-gitops" ]
+
+# ------------------------------------------------
+# OpenCodeQuest 
+# ------------------------------------------------
+ocp4_worklod_platform_engineering_workshop_opencodequest_openai_url: https://granite-3-3-8b-instruct-maas-apicast-production.apps.prod.rhoai.rh-aiservices-bu.com:443/v1
+ocp4_worklod_platform_engineering_workshop_opencodequest_openai_model: granite-3-3-8b-instruct
+ocp4_worklod_platform_engineering_workshop_opencodequest_openai_key: a73314fb98ea71a92b4e93f4b234d877

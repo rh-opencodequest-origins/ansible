@@ -1,4 +1,5 @@
 ---
+
 - name: Create GitLab application
   kubernetes.core.k8s:
     state: present

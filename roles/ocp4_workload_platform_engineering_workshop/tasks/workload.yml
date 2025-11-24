@@ -1,8 +1,8 @@
 ---
 
-- name: Install OpenShift Gitops
-  ansible.builtin.include_tasks: openshift_gitops.yml
-  tags: install_gitops
+# - name: Install OpenShift Gitops
+#   ansible.builtin.include_tasks: openshift_gitops.yml
+#   tags: install_gitops
 
 - name: Install OpenShift Pipelines
   ansible.builtin.include_tasks: openshift_pipelines.yml
@@ -74,9 +74,9 @@
   ansible.builtin.include_tasks: trusted_artifact_signer.yml
   tags: instal_tas
 
-- name: Install Sonarqube
-  ansible.builtin.include_tasks: sonarqube.yml
-  tags: install_sonarqube
+# - name: Install Sonarqube
+#   ansible.builtin.include_tasks: sonarqube.yml
+#   tags: install_sonarqube
 
 - name: Install Vault Secrets
   ansible.builtin.include_tasks: vault_secrets.yml
@@ -93,6 +93,23 @@
 - name: Install RBAC Application for Rolebindings
   ansible.builtin.include_tasks: rbac.yml
   tags: install_rbac
+
+- name: Install EDB Applications
+  ansible.builtin.include_tasks: edb.yml
+  tags: install_edb
+
+- name: Install OpenCodeQuest Fight-UI Applications
+  ansible.builtin.include_tasks: ocq_fightui.yml
+  loop: "{{ (opencodequest.clusters | selectattr('name','equalto', cluster) | first).groups }}"
+  loop_control:
+    loop_var: group
+  vars:
+    ocp4_workload_platform_engineering_workshop_ocq_fightui_application_name: "dev{{ group.name }}-fight-ui-bootstrap"
+    ocp4_workload_platform_engineering_workshop_ocq_fightui_team: "{{ group.name }}"
+  tags: install_ocq_fightui
+
+
+
 
 - name: Print Common Password
   agnosticd_user_info:

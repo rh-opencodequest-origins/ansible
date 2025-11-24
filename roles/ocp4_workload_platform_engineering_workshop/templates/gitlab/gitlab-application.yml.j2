@@ -17,27 +17,34 @@ spec:
 
           templates:
             - group: rhdh
-              project: template-quarkus-simple
-              branch: main
-              templates:
-                - template.yaml
-            - group: rhdh
+              user1: {{ g.users[0] | default('user1') }}
+              user2: {{ g.users[1] | default('user2') }}
+              user3: {{ g.users[2] | default('user3') }}
               project: import-existing-app-template
               branch: main
               templates:
                 - template.yaml
             - group: rhdh
+              user1: {{ g.users[0] | default('user1') }}
+              user2: {{ g.users[1] | default('user2') }}
+              user3: {{ g.users[2] | default('user3') }}
               project: import-existing-api-template
               branch: main
               templates:
                 - template.yaml
             - group: global
+              user1: {{ g.users[0] | default('user1') }}
+              user2: {{ g.users[1] | default('user2') }}
+              user3: {{ g.users[2] | default('user3') }}
               project: global-techdocs
               branch: main
               templates:
                 - catalog-info.yaml
                 - mkdocs.yaml
             - group: rhdh
+              user1: {{ g.users[0] | default('user1') }}
+              user2: {{ g.users[1] | default('user2') }}
+              user3: {{ g.users[2] | default('user3') }}
               project: template-developer-self-service
               branch: main
               templates:
@@ -46,6 +53,9 @@ spec:
                 - namespace/template-medium.yaml
                 - namespace/template-large.yaml
             - group: rhdh
+              user1: {{ g.users[0] | default('user1') }}
+              user2: {{ g.users[1] | default('user2') }}
+              user3: {{ g.users[2] | default('user3') }}
               project: orchestrator-workflows
               branch: main
               templates:
@@ -53,25 +63,108 @@ spec:
                 - manifests/create-ocp-namespace-swt/application.yaml
 {% for g in (opencodequest.clusters | selectattr('name','equalto', cluster) | first).groups %}
             - group: pe{{ g.name }}
-              project: template-quarkus-simple
-              branch: main
-              templates:
-                - template.yaml
-            - group: pe{{ g.name }}
+              user1: {{ g.users[0] }}
+              user2: {{ g.users[1] }}
+              user3: {{ g.users[2] }}
               project: opencodequest-templates
               branch: main
               templates:
                 - scaffolder-templates/opencodequest-templates.yaml
                 - scaffolder-templates/fight-ui/template.yaml
                 - scaffolder-templates/quarkus-ai/template.yaml
+                - scaffolder-templates/quarkus-ai/skeleton/src/main/resources/application.properties
                 - scaffolder-templates/quarkus-postgresql/template.yaml
+                - scaffolder-templates/quarkus-postgresql/skeleton/src/main/resources/application.properties
                 - scaffolder-templates/quarkus-with-spring-postgresql/template.yaml
+                - scaffolder-templates/quarkus-with-spring-postgresql/skeleton/src/main/resources/application.properties
+
             - group: pe{{ g.name }}
+              user1: {{ g.users[0] }}
+              user2: {{ g.users[1] }}
+              user3: {{ g.users[2] }}
               project: rhdh-entities
               branch: main
               templates:
                 - systems/opencodequest-system.yaml
                 - domains/domain-opencodequest.yaml
+{% endfor %}
+
+
+{% for g in (opencodequest.clusters | selectattr('name','equalto', cluster) | first).groups %}
+            - group: dev{{ g.name }}
+              project: soluce
+              branch: main
+              ocpdomain: {{ r_openshift_subdomain }}
+              teamid: {{ g.name }}
+              templates:
+                - ./fight/catalog-info.yaml
+                - ./fight/src/main/resources/application.properties
+
+                - ./fight-gitops/argocd/fight-argocd-app-prod.yaml
+                - ./fight-gitops/argocd/fight-argocd-repo.yaml
+                - ./fight-gitops/argocd/fight-argocd-app-dev-build.yaml
+                - ./fight-gitops/argocd/fight-argocd-app-dev.yaml
+                - ./fight-gitops/argocd/fight-argocd-app-preprod.yaml
+                - ./fight-gitops/helm/app/templates/_helpers.tpl
+                - ./fight-gitops/helm/app/templates/rolebinding.yaml
+                - ./fight-gitops/helm/app/values.yaml
+                - ./fight-gitops/helm/build/values.yaml
+
+                - ./hero/catalog-info.yaml
+                - ./hero/src/main/resources/application.properties
+
+                - ./hero-gitops/argocd/hero-argocd-repo.yaml
+                - ./hero-gitops/argocd/hero-argocd-app-prod.yaml
+                - ./hero-gitops/argocd/hero-argocd-app-dev.yaml
+                - ./hero-gitops/argocd/hero-argocd-app-dev-build.yaml
+                - ./hero-gitops/argocd/hero-argocd-app-preprod.yaml
+                - ./hero-gitops/helm/app/templates/_helpers.tpl
+                - ./hero-gitops/helm/app/templates/rolebinding.yaml
+                - ./hero-gitops/helm/app/values.yaml
+                - ./hero-gitops/helm/build/values.yaml
+
+                - ./fight-ui/catalog-info.yaml
+
+                - ./fight-ui-gitops/argocd/fight-ui-argocd-repo.yaml
+                - ./fight-ui-gitops/argocd/fight-ui-argocd-app-prod.yaml
+                - ./fight-ui-gitops/argocd/fight-ui-argocd-app-preprod.yaml
+                - ./fight-ui-gitops/argocd/fight-ui-argocd-app-dev.yaml
+                - ./fight-ui-gitops/helm/app/templates/deployment.yaml
+                - ./fight-ui-gitops/helm/app/templates/_helpers.tpl
+
+                - ./villain/catalog-info.yaml
+                - ./villain/src/main/resources/application.properties
+
+                - ./villain-gitops/argocd/villain-argocd-app-preprod.yaml
+                - ./villain-gitops/argocd/villain-argocd-app-dev.yaml
+                - ./villain-gitops/argocd/villain-argocd-app-prod.yaml
+                - ./villain-gitops/argocd/villain-argocd-app-dev-build.yaml
+                - ./villain-gitops/argocd/villain-argocd-repo.yaml
+                - ./villain-gitops/helm/app/templates/_helpers.tpl
+                - ./villain-gitops/helm/app/templates/rolebinding.yaml
+                - ./villain-gitops/helm/app/values.yaml
+                - ./villain-gitops/helm/build/values.yaml
+
+            - group: dev{{ g.name }}
+              project: fight-ui-gitops
+              branch: main
+              ocpdomain: {{ r_openshift_subdomain }}
+              teamid: {{ g.name }}
+              templates:
+                - ./argocd/fight-ui-argocd-repo.yaml
+                - ./argocd/fight-ui-argocd-app-prod.yaml
+                - ./argocd/fight-ui-argocd-app-preprod.yaml
+                - ./argocd/fight-ui-argocd-app-dev.yaml
+                - ./helm/app/templates/deployment.yaml
+                - ./helm/app/templates/_helpers.tpl
+
+            - group: dev{{ g.name }}
+              project: fight-ui
+              branch: main
+              ocpdomain: {{ r_openshift_subdomain }}
+              teamid: {{ g.name }}
+              templates:
+                - ./catalog-info.yaml
 {% endfor %}
 
           users:
@@ -83,7 +176,9 @@ spec:
 {% for g in (opencodequest.clusters | selectattr('name','equalto', cluster) | first).groups %}
 {% for u in g.users %}
               - id: {{ u }}-pe
+                password: {{ u[:3] }}2025!!
               - id: {{ u }}-dev
+                password: {{ u[:3] }}2025!!
 {% endfor %}
 {% endfor %}
             password: 
@@ -142,22 +237,24 @@ spec:
                   url: https://github.com/rh-opencodequest-origins/rhdh-template-quarkus-simple.git
                 - name: parasol-store-dev-template
                   url: https://github.com/rh-opencodequest-origins/parasol-store-dev-templates.git
-                - name: developer-hub-config
-                  url: https://github.com/rh-opencodequest-origins/developer-hub-config.git
                 - name: import-existing-app-template
                   url: https://github.com/rh-opencodequest-origins/import-existing-app-template.git
                 - name: import-existing-api-template
                   url: https://github.com/rh-opencodequest-origins/import-api-template.git
-                - name: rhdh-entities
-                  url: https://github.com/rh-opencodequest-origins/pe-workshop-entities.git
                 - name: template-developer-self-service
                   url: https://github.com/rh-opencodequest-origins/rhdh-template-developer-self-service.git
                 - name: orchestrator-workflows
                   url: https://github.com/rh-opencodequest-origins/orchestrator-workflows.git
+
+                - name: rhdh-entities
+                  url: https://github.com/rh-opencodequest-origins/pe-workshop-entities.git
+                - name: developer-hub-config
+                  url: https://github.com/rh-opencodequest-origins/developer-hub-config.git
                 - name: opencodequest-templates
                   url: https://github.com/rh-opencodequest-origins/opencodequest-templates.git
                 - name: fullcodebase
                   url: https://github.com/rh-opencodequest-origins/fullcodebase.git
+
               users:
 {% for u in g.users %}
                 - id: {{ u }}-pe
@@ -173,7 +270,13 @@ spec:
 
 {% for g in (opencodequest.clusters | selectattr('name','equalto', cluster) | first).groups %}
             - name: dev{{ g.name }}
-              repo: [] 
+              repo: 
+               - name: soluce
+                 url: https://github.com/rh-opencodequest-origins/soluce.git
+               - name: fight-ui
+                 url: https://github.com/rh-opencodequest-origins/fight-ui.git
+               - name: fight-ui-gitops
+                 url: https://github.com/rh-opencodequest-origins/fight-ui-gitops.git
               users:
 {% for u in g.users %}
                 - id: {{ u }}-dev
@@ -217,6 +320,16 @@ spec:
           value: {{ ocp4_workload_platform_engineering_workshop_vault_namespace }}
         - name: orchestrator.namespace
           value: {{ ocp4_workload_platform_engineering_workshop_orchestrator_namespace }}
+{% for g in (opencodequest.clusters | selectattr('name','equalto', cluster) | first).groups %}
+        - name: {{ g.name }}.user1
+          value: {{ g.users[0] }}
+        - name: {{ g.name }}.user2
+          value: {{ g.users[1] }}
+        - name: {{ g.name }}.user3
+          value: {{ g.users[2] }}
+{% endfor %}
+
+
     path: {{ ocp4_workload_platform_engineering_workshop_gitlab_gitops_repo_path }}
     repoURL: {{ ocp4_workload_platform_engineering_workshop_gitlab_gitops_repo }}
     targetRevision: {{ ocp4_workload_platform_engineering_workshop_gitlab_gitops_repo_tag }}
@@ -231,3 +344,4 @@ spec:
     syncOptions:
       - CreateNamespace=true
       - RespectIgnoreDifferences=true
+      - ServerSideApply=true

@@ -11,6 +11,9 @@ spec:
 {% for cluster in opencodequest.clusters %}
 {% for group in cluster.groups %}
       - team: {{ group.name }}
+        user1: {{ group.users[0] }}
+        user2: {{ group.users[1] }}
+        user3: {{ group.users[2] }}
 {% endfor %}
 {% endfor %}
   template:
@@ -32,9 +35,24 @@ spec:
           - name: "antora.asciidocAttributes.openshift_cluster_ingress_domain"
             value: "{{ r_openshift_subdomain }}"
           - name: "antora.asciidocAttributes.common_password"
-            value: "{{ common_password }}"
+            value: "See the hero card password"
           - name: "antora.asciidocAttributes.team-id"
             value: "{% raw %}{{ team }}{% endraw %}"
+
+          - name: "antora.asciidocAttributes.user1"
+            value: "{% raw %}{{ user1 }}{% endraw %}"
+          - name: "antora.asciidocAttributes.user2"
+            value: "{% raw %}{{ user2 }}{% endraw %}"
+          - name: "antora.asciidocAttributes.user3"
+            value: "{% raw %}{{ user3 }}{% endraw %}"
+
+          - name: "antora.asciidocAttributes.openai-url"
+            value: {{ ocp4_worklod_platform_engineering_workshop_opencodequest_openai_url }}
+          - name: "antora.asciidocAttributes.openai-model"
+            value: {{ ocp4_worklod_platform_engineering_workshop_opencodequest_openai_model }}
+          - name: "antora.asciidocAttributes.openai-key"
+            value: {{ ocp4_worklod_platform_engineering_workshop_opencodequest_openai_key }}
+
       destination:
         server: https://kubernetes.default.svc
         namespace: '{{ ocp4_workload_platform_engineering_workshop_showroom_application_name }}-{% raw %}{{ team }}{% endraw %}'

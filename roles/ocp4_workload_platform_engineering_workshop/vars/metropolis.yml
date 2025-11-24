@@ -8,10 +8,12 @@ opencodequest:
         - name: team1
           users: [ "spider", "valkyri", "ironma" ]
         - name: team2
-          users: [ "zuko", "batman", "double" ]
+          users: [ "dreamg", "batman", "double" ]
         - name: team3
-          users: [ "billyl" , "cynthia" , "atom"]
+          users: [ "billyl" , "cynthia" , "atom" ]
         - name: team4
-          users: [ "sonyab" , "coyote" , "jackbr"]
+          users: [ "sonyab" , "coyote" , "jackbr" ]
         - name: team5
-          users: [ "greatk" , "kelpie" , "renaro"]
+          users: [ "greatk" , "kelpie" , "renaro" ]
+        - name: team6
+          users: [ "rh1" , "rh2" , "rh3" ]

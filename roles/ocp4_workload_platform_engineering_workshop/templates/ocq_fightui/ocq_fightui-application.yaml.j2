@@ -1,0 +1,32 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{ ocp4_workload_platform_engineering_workshop_ocq_fightui_application_name }}
+  namespace: rhdh-gitops
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io/foreground
+spec:
+  destination:
+    name: ""
+    server: 'https://kubernetes.default.svc'
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    retry:
+      backoff:
+        duration: 10s
+        factor: 2
+        maxDuration: 10m
+      limit: 15
+    syncOptions:
+      - CreateNamespace=true
+      - RespectIgnoreDifferences=true
+      - ApplyOutOfSyncOnly=true
+  source:
+    repoURL: https://gitlab-gitlab.{{ r_openshift_subdomain }}/dev{{ ocp4_workload_platform_engineering_workshop_ocq_fightui_team }}/fight-ui-gitops.git
+    targetRevision: main
+    path: argocd/
+

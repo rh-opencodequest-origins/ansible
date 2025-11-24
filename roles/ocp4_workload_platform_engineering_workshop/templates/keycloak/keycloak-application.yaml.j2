@@ -95,9 +95,11 @@ spec:
 {% for g in (opencodequest.clusters | selectattr('name','equalto', cluster) | first).groups %}
 {% for u in g.users %}
               - id: {{ u }}-dev
+                password: {{ u[:3] }}2025!!
                 groups:
                   - dev{{ g.name }}
               - id: {{ u }}-pe
+                password: {{ u[:3] }}2025!!
                 groups:
                   - pe{{ g.name }}
                   - dev{{ g.name }}

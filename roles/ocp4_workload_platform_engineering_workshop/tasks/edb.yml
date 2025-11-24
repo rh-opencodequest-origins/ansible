@@ -1,0 +1,30 @@
+---
+
+- name: Create EDB operator application
+  kubernetes.core.k8s:
+    state: present
+    definition: "{{ lookup('template', 'edb/edb-operator.yml.j2') | from_yaml }}"
+  retries: 10
+  delay: 30
+  ignore_errors: true
+  register: edb_oerator_result
+  until: edb_oerator_result is not failed
+
+- name: Print edb_oerator_result from the previous task
+  ansible.builtin.debug:
+    var: edb_oerator_result
+
+
+- name: Create EDB production cluster application
+  kubernetes.core.k8s:
+    state: present
+    definition: "{{ lookup('template', 'edb/edb-prod-cluster.yml.j2') | from_yaml }}"
+  retries: 10
+  delay: 30
+  ignore_errors: true
+  register: edb_prod_cluster_result
+  until: edb_prod_cluster_result is not failed
+
+- name: Print edb_prod_cluster_result from the previous task
+  ansible.builtin.debug:
+    var: edb_prod_cluster_result

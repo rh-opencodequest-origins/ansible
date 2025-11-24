@@ -10,8 +10,10 @@ opencodequest:
         - name: team2
           users: [ "rocket", "jonsno", "lightsp" ]
         - name: team3
-          users: [ "captain" , "coleyo" , "mariah"]
+          users: [ "captain" , "coleyo" , "mariah" ]
         - name: team4
-          users: [ "niteow" , "morita" , "sprite"]
+          users: [ "niteow" , "morita" , "sprite" ]
         - name: team5
-          users: [ "reaper" , "shatter" , "acegri"]
+          users: [ "reaper" , "shatter" , "acegri" ]
+        - name: team6
+          users: [ "rh1" , "rh2" , "rh3" ]

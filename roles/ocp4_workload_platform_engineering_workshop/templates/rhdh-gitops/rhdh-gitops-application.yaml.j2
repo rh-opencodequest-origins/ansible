@@ -30,3 +30,11 @@ spec:
       values: |
         nameOverride: {{ ocp4_workload_platform_engineering_workshop_rhdh_gitops_name }}
         password: {{ ocp4_workload_platform_engineering_workshop_rhdh_gitops_password }}
+        controller:
+          resources:
+            limits:
+              cpu: 1500m
+              memory: 3Gi
+            requests:
+              cpu: 600m
+              memory: 1Gi
