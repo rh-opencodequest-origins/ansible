@@ -1,8 +1,8 @@
 ---
 
-# - name: Install OpenShift Gitops
-#   ansible.builtin.include_tasks: openshift_gitops.yml
-#   tags: install_gitops
+- name: Install OpenShift Gitops
+  ansible.builtin.include_tasks: openshift_gitops.yml
+  tags: install_gitops
 
 - name: Install OpenShift Pipelines
   ansible.builtin.include_tasks: openshift_pipelines.yml
