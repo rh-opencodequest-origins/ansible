@@ -427,15 +427,18 @@ ocp4_workload_platform_engineering_workshop_showroom_gitops_repo_path: showroom
 # ------------------------------------------------
 # Showroom Deployer
 # ------------------------------------------------
-ocp4_workload_platform_engineering_workshop_showroom_deployer_application_name: showroom-deployer
+ocp4_workload_platform_engineering_workshop_showroom_deployer_application_name: showroom
+ocp4_workload_platform_engineering_workshop_showroom_deployer_application_namespace: showroom
 ocp4_workload_platform_engineering_workshop_showroom_deployer_gitops_repo: https://github.com/rhpds/showroom-deployer.git
 ocp4_workload_platform_engineering_workshop_showroom_deployer_gitops_repo_tag: main
 ocp4_workload_platform_engineering_workshop_showroom_deployer_gitops_repo_path: charts/showroom-single-pod
 
 ocp4_workload_platform_engineering_workshop_showroom_deployer_content_repo_url: https://github.com/rh-opencodequest-origins/showroom.git
-ocp4_workload_platform_engineering_workshop_showroom_deployer_content_repo_ref: fix/showroom-single-pod-compat
+#ocp4_workload_platform_engineering_workshop_showroom_deployer_content_repo_ref: fix/showroom-single-pod-compat
+ocp4_workload_platform_engineering_workshop_showroom_deployer_content_repo_ref: fix/content-quality-fixes
 
-ocp4_workload_platform_engineering_workshop_showroom_deployer_wetty_auto_ssh: "false"
+
+ocp4_workload_platform_engineering_workshop_showroom_deployer_wetty_auto_ssh: "true"
 ocp4_workload_platform_engineering_workshop_showroom_deployer_wetty_ssh_host: ""
 ocp4_workload_platform_engineering_workshop_showroom_deployer_wetty_ssh_port: "22"
 ocp4_workload_platform_engineering_workshop_showroom_deployer_wetty_ssh_user: "lab-user"

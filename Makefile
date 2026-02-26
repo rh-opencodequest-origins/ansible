@@ -10,6 +10,9 @@ INFRA_PLAYBOOK = playbooks/ocp4_workload_platform_engineering_workshop_infra_clu
 # Default action
 ACTION ?= create
 
+# Extra variables to pass to ansible-playbook (e.g. EXTRA_VARS="-e key=value")
+EXTRA_VARS ?=
+
 .PHONY: help cluster atlantis central gotham madripoor wakanda infra metropolis
 
 help:
@@ -35,7 +38,7 @@ wakanda: cluster
 
 cluster:
 	@start=$$(date); \
-	ansible-playbook $(PLAYBOOK) -e ACTION=create -e cluster=$(CLUSTER); \
+	ansible-playbook $(PLAYBOOK) -e ACTION=create -e cluster=$(CLUSTER) $(EXTRA_VARS); \
 	end=$$(date); \
 	echo "Start at $$start"; \
 	echo "End   at $$end"
