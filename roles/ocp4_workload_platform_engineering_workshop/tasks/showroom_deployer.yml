@@ -1,0 +1,10 @@
+---
+- name: Create Showroom Deployer applicationSet
+  kubernetes.core.k8s:
+    state: present
+    definition: "{{ lookup('template', 'showroom-deployer/showroom-deployer-applicationSet.yaml.j2') | from_yaml }}"
+  retries: 10
+  delay: 30
+  ignore_errors: true
+  register: showroom_deployer_result
+  until: showroom_deployer_result is not failed

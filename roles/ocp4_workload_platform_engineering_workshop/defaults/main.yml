@@ -180,7 +180,7 @@ ocp4_workload_platform_engineering_workshop_openshift_pipelines_application_name
 ocp4_workload_platform_engineering_workshop_openshift_pipelines_application_name: openshift-pipelines
 ocp4_workload_platform_engineering_workshop_openshift_pipelines_namespace: openshift-operators
 ocp4_workload_platform_engineering_workshop_openshift_pipelines_gitops_repo: https://github.com/rh-opencodequest-origins/helm.git
-ocp4_workload_platform_engineering_workshop_openshift_pipelines_gitops_repo_tag: openshift-pipelines
+ocp4_workload_platform_engineering_workshop_openshift_pipelines_gitops_repo_tag: opencodequest
 ocp4_workload_platform_engineering_workshop_openshift_pipelines_gitops_repo_path: openshift-pipelines
 
 # ------------------------------------------------
@@ -193,7 +193,7 @@ ocp4_workload_platform_engineering_workshop_noobaa_application_namespace: opensh
 ocp4_workload_platform_engineering_workshop_noobaa_application_name: noobaa
 ocp4_workload_platform_engineering_workshop_noobaa_namespace: openshift-storage
 ocp4_workload_platform_engineering_workshop_noobaa_gitops_repo: https://github.com/rh-opencodequest-origins/helm.git
-ocp4_workload_platform_engineering_workshop_noobaa_gitops_repo_tag: noobaa-ocp16
+ocp4_workload_platform_engineering_workshop_noobaa_gitops_repo_tag: opencodequest
 ocp4_workload_platform_engineering_workshop_noobaa_gitops_repo_path: noobaa
 
 ocp4_workload_platform_engineering_workshop_noobaa_name: noobaa
@@ -204,9 +204,9 @@ ocp4_workload_platform_engineering_workshop_noobaa_name: noobaa
 
 ocp4_workload_platform_engineering_workshop_gitlab_namespace: gitlab
 
-ocp4_workload_platform_engineering_workshop_gitlab_gitops_repo: https://github.com/rh-opencodequest-origins/agnosticg.git
-ocp4_workload_platform_engineering_workshop_gitlab_gitops_repo_path: charts/gitlab
-ocp4_workload_platform_engineering_workshop_gitlab_gitops_repo_tag: orchestrator
+ocp4_workload_platform_engineering_workshop_gitlab_gitops_repo: https://github.com/rh-opencodequest-origins/helm.git
+ocp4_workload_platform_engineering_workshop_gitlab_gitops_repo_path: gitlab
+ocp4_workload_platform_engineering_workshop_gitlab_gitops_repo_tag: opencodequest
 ocp4_workload_platform_engineering_workshop_gitlab_gitops_name: gitlab
 ocp4_workload_platform_engineering_workshop_gitlab_gitops_namespace: openshift-gitops
 
@@ -235,7 +235,7 @@ ocp4_workload_platform_engineering_workshop_rhbk_application_namespace: openshif
 ocp4_workload_platform_engineering_workshop_rhbk_application_name: keycloak
 ocp4_workload_platform_engineering_workshop_rhbk_namespace: keycloak
 ocp4_workload_platform_engineering_workshop_rhbk_gitops_repo: https://github.com/rh-opencodequest-origins/helm.git
-ocp4_workload_platform_engineering_workshop_rhbk_gitops_repo_tag: backstage-auth-keycloak
+ocp4_workload_platform_engineering_workshop_rhbk_gitops_repo_tag: opencodequest
 ocp4_workload_platform_engineering_workshop_rhbk_gitops_repo_path: keycloak
 
 ocp4_workload_platform_engineering_workshop_rhbk_cr_name: keycloak
@@ -267,7 +267,7 @@ ocp4_workload_platform_engineering_workshop_devspaces_application_name: devspace
 ocp4_workload_platform_engineering_workshop_devspaces_application_namespace: openshift-gitops
 ocp4_workload_platform_engineering_workshop_devspaces_gitops_repo: https://github.com/rh-opencodequest-origins/helm.git
 ocp4_workload_platform_engineering_workshop_devspaces_gitops_repo_path: devspaces
-ocp4_workload_platform_engineering_workshop_devspaces_gitops_repo_tag: devspaces
+ocp4_workload_platform_engineering_workshop_devspaces_gitops_repo_tag: opencodequest
 ocp4_workload_platform_engineering_workshop_devspaces_namespace: openshift-devspaces
 
 
@@ -281,7 +281,7 @@ ocp4_workload_platform_engineering_workshop_quay_application_namespace: openshif
 ocp4_workload_platform_engineering_workshop_quay_application_name: quay
 ocp4_workload_platform_engineering_workshop_quay_namespace: quay-registry
 ocp4_workload_platform_engineering_workshop_quay_gitops_repo: https://github.com/rh-opencodequest-origins/helm.git
-ocp4_workload_platform_engineering_workshop_quay_gitops_repo_tag: quay-vault
+ocp4_workload_platform_engineering_workshop_quay_gitops_repo_tag: opencodequest
 ocp4_workload_platform_engineering_workshop_quay_gitops_repo_path: quay
 
 # If quay is deployed in another cluster
@@ -304,9 +304,9 @@ ocp4_workload_platform_engineering_workshop_quay_organizations:
 ocp4_workload_platform_engineering_workshop_vault_application_namespace: openshift-gitops
 ocp4_workload_platform_engineering_workshop_vault_application_name: vault
 ocp4_workload_platform_engineering_workshop_vault_namespace: vault
-ocp4_workload_platform_engineering_workshop_vault_gitops_repo: https://github.com/rh-opencodequest-origins/agnosticg.git
-ocp4_workload_platform_engineering_workshop_vault_gitops_repo_tag: pew-vault
-ocp4_workload_platform_engineering_workshop_vault_gitops_repo_path: charts/hashicorp-vault
+ocp4_workload_platform_engineering_workshop_vault_gitops_repo: https://github.com/rh-opencodequest-origins/helm.git
+ocp4_workload_platform_engineering_workshop_vault_gitops_repo_tag: opencodequest
+ocp4_workload_platform_engineering_workshop_vault_gitops_repo_path: hashicorp-vault
 
 ocp4_workload_platform_engineering_workshop_vault_name: vault
 
@@ -320,7 +320,7 @@ ocp4_workload_platform_engineering_workshop_external_secrets_application_namespa
 ocp4_workload_platform_engineering_workshop_external_secrets_application_name: external-secrets
 ocp4_workload_platform_engineering_workshop_external_secrets_namespace: external-secrets
 ocp4_workload_platform_engineering_workshop_external_secrets_gitops_repo: https://github.com/rh-opencodequest-origins/helm.git
-ocp4_workload_platform_engineering_workshop_external_secrets_gitops_repo_tag: external-secrets
+ocp4_workload_platform_engineering_workshop_external_secrets_gitops_repo_tag: opencodequest
 ocp4_workload_platform_engineering_workshop_external_secrets_gitops_repo_path: external-secrets
 
 # ------------------------------------------------
@@ -331,7 +331,7 @@ ocp4_workload_platform_engineering_workshop_rhdh_gitops_application_namespace: o
 ocp4_workload_platform_engineering_workshop_rhdh_gitops_application_name: rhdh-gitops
 ocp4_workload_platform_engineering_workshop_rhdh_gitops_namespace: rhdh-gitops
 ocp4_workload_platform_engineering_workshop_rhdh_gitops_gitops_repo: https://github.com/rh-opencodequest-origins/helm.git
-ocp4_workload_platform_engineering_workshop_rhdh_gitops_gitops_repo_tag: rhdh-gitops
+ocp4_workload_platform_engineering_workshop_rhdh_gitops_gitops_repo_tag: opencodequest
 ocp4_workload_platform_engineering_workshop_rhdh_gitops_gitops_repo_path: gitops
 
 ocp4_workload_platform_engineering_workshop_rhdh_gitops_name: rhdh-gitops
@@ -347,7 +347,7 @@ ocp4_workload_platform_engineering_workshop_rhdh_namespace: backstage
 ocp4_workload_platform_engineering_workshop_rhdh_groupname: rhdh
 
 ocp4_workload_platform_engineering_workshop_rhdh_helm_repo: https://github.com/rh-opencodequest-origins/helm.git
-ocp4_workload_platform_engineering_workshop_rhdh_helm_repo_tag: bootstrap-orchestrator
+ocp4_workload_platform_engineering_workshop_rhdh_helm_repo_tag: opencodequest
 ocp4_workload_platform_engineering_workshop_rhdh_helm_repo_path: redhat-developer-hub
 
 ocp4_workload_platform_engineering_workshop_rhdh_psql_password: password
@@ -365,7 +365,7 @@ ocp4_workload_platform_engineering_workshop_rhtas_application_namespace: openshi
 ocp4_workload_platform_engineering_workshop_rhtas_application_name: trusted-artifact-signer
 ocp4_workload_platform_engineering_workshop_rhtas_namespace: trusted-artifact-signer
 ocp4_workload_platform_engineering_workshop_rhtas_gitops_repo: https://github.com/rh-opencodequest-origins/helm.git
-ocp4_workload_platform_engineering_workshop_rhtas_gitops_repo_tag: trusted-artifact-signer
+ocp4_workload_platform_engineering_workshop_rhtas_gitops_repo_tag: opencodequest
 ocp4_workload_platform_engineering_workshop_rhtas_gitops_repo_path: rhtas
 
 ocp4_workload_platform_engineering_workshop_rhtas_instance_name: securesign
@@ -379,7 +379,7 @@ ocp4_workload_platform_engineering_workshop_rhtas_root_cert_org: Parasol
 # ------------------------------------------------
 
 ocp4_workload_platform_engineering_workshop_parasol_application_repo: https://github.com/rh-opencodequest-origins/helm.git
-ocp4_workload_platform_engineering_workshop_parasol_application_repo_tag: parasol
+ocp4_workload_platform_engineering_workshop_parasol_application_repo_tag: opencodequest
 ocp4_workload_platform_engineering_workshop_parasol_application_repo_path: parasol
 ocp4_workload_platform_engineering_workshop_parasol_application_name: parasol
 ocp4_workload_platform_engineering_workshop_parasol_application_namespace: openshift-gitops
@@ -393,7 +393,7 @@ ocp4_workload_platform_engineering_workshop_orchestrator_application_namespace: 
 ocp4_workload_platform_engineering_workshop_orchestrator_application_name: orchestrator
 ocp4_workload_platform_engineering_workshop_orchestrator_namespace: orchestrator
 ocp4_workload_platform_engineering_workshop_orchestrator_gitops_repo: https://github.com/rh-opencodequest-origins/helm.git
-ocp4_workload_platform_engineering_workshop_orchestrator_gitops_repo_tag: orchestrator
+ocp4_workload_platform_engineering_workshop_orchestrator_gitops_repo_tag: opencodequest
 ocp4_workload_platform_engineering_workshop_orchestrator_gitops_repo_path: orchestrator
 
 
@@ -403,9 +403,9 @@ ocp4_workload_platform_engineering_workshop_orchestrator_gitops_repo_path: orche
 ocp4_workload_platform_engineering_workshop_sonarqube_application_name: sonarqube
 ocp4_workload_platform_engineering_workshop_sonarqube_application_namespace: openshift-gitops
 ocp4_workload_platform_engineering_workshop_sonarqube_namespace: sonarqube
-ocp4_workload_platform_engineering_workshop_sonarqube_gitops_repo: https://github.com/rh-opencodequest-origins/agnosticg.git
-ocp4_workload_platform_engineering_workshop_sonarqube_gitops_repo_tag: orchestrator
-ocp4_workload_platform_engineering_workshop_sonarqube_gitops_repo_path: charts/sonarqube
+ocp4_workload_platform_engineering_workshop_sonarqube_gitops_repo: https://github.com/rh-opencodequest-origins/helm.git
+ocp4_workload_platform_engineering_workshop_sonarqube_gitops_repo_tag: opencodequest
+ocp4_workload_platform_engineering_workshop_sonarqube_gitops_repo_path: sonarqube
 ocp4_workload_platform_engineering_workshop_sonarqube_name: sonarqube
 
 
@@ -421,8 +421,26 @@ ocp4_workload_platform_engineering_workshop_stackrox_endpoint:
 # ------------------------------------------------
 ocp4_workload_platform_engineering_workshop_showroom_application_name: showroom
 ocp4_workload_platform_engineering_workshop_showroom_gitops_repo: https://github.com/rh-opencodequest-origins/helm.git
-ocp4_workload_platform_engineering_workshop_showroom_gitops_repo_tag: bootstrap-orchestrator
+ocp4_workload_platform_engineering_workshop_showroom_gitops_repo_tag: opencodequest
 ocp4_workload_platform_engineering_workshop_showroom_gitops_repo_path: showroom
+
+# ------------------------------------------------
+# Showroom Deployer
+# ------------------------------------------------
+ocp4_workload_platform_engineering_workshop_showroom_deployer_application_name: showroom-deployer
+ocp4_workload_platform_engineering_workshop_showroom_deployer_gitops_repo: https://github.com/rhpds/showroom-deployer.git
+ocp4_workload_platform_engineering_workshop_showroom_deployer_gitops_repo_tag: main
+ocp4_workload_platform_engineering_workshop_showroom_deployer_gitops_repo_path: charts/showroom-single-pod
+
+ocp4_workload_platform_engineering_workshop_showroom_deployer_content_repo_url: https://github.com/rh-opencodequest-origins/showroom.git
+ocp4_workload_platform_engineering_workshop_showroom_deployer_content_repo_ref: fix/showroom-single-pod-compat
+
+ocp4_workload_platform_engineering_workshop_showroom_deployer_wetty_auto_ssh: "false"
+ocp4_workload_platform_engineering_workshop_showroom_deployer_wetty_ssh_host: ""
+ocp4_workload_platform_engineering_workshop_showroom_deployer_wetty_ssh_port: "22"
+ocp4_workload_platform_engineering_workshop_showroom_deployer_wetty_ssh_user: "lab-user"
+ocp4_workload_platform_engineering_workshop_showroom_deployer_wetty_ssh_auth: "password"
+ocp4_workload_platform_engineering_workshop_showroom_deployer_wetty_ssh_pass: "{{ common_password }}"
 
 # ------------------------------------------------
 # OpenCodeQuest Fight-UI
@@ -436,7 +454,7 @@ ocp4_workload_platform_engineering_workshop_ocq_fightui_application_namespace: r
 ocp4_worklod_platform_engineering_workshop_rbac_application_name: rbac
 ocp4_workload_platform_engineering_workshop_rbac_application_namespace: openshift-gitops
 ocp4_workload_platform_engineering_workshop_rbac_gitops_repo: https://github.com/rh-opencodequest-origins/helm.git
-ocp4_workload_platform_engineering_workshop_rbac_gitops_repo_tag: orchestrator
+ocp4_workload_platform_engineering_workshop_rbac_gitops_repo_tag: opencodequest
 ocp4_workload_platform_engineering_workshop_rbac_gitops_repo_path: rbac
 ocp4_workload_platform_engineering_workshop_rbac_view_namespaces: [ "gitlab" , "openshift-gitops" , "rhdh-gitops" ]
 

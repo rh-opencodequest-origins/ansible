@@ -82,9 +82,13 @@
   ansible.builtin.include_tasks: vault_secrets.yml
   tags: install_vault_secrets
 
-- name: Install Showroom documentation
-  ansible.builtin.include_tasks: showroom.yml
-  tags: instal_showroom
+# - name: Install Showroom documentation
+#   ansible.builtin.include_tasks: showroom.yml
+#   tags: instal_showroom
+
+- name: Install Showroom Deployer
+  ansible.builtin.include_tasks: showroom_deployer.yml
+  tags: install_showroom_deployer
 
 - name: Update OpenShift Identity Provider
   ansible.builtin.include_tasks: openshift_idp.yml

@@ -1,0 +1,79 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: {{ ocp4_workload_platform_engineering_workshop_showroom_deployer_application_name }}
+  namespace: openshift-gitops
+spec:
+  generators:
+  - list:
+      elements:
+{% for cluster in opencodequest.clusters %}
+{% for group in cluster.groups %}
+      - team: {{ group.name }}
+        user1: {{ group.users[0] }}
+        user2: {{ group.users[1] }}
+        user3: {{ group.users[2] }}
+{% endfor %}
+{% endfor %}
+  template:
+    metadata:
+      name: '{{ ocp4_workload_platform_engineering_workshop_showroom_deployer_application_name }}-{% raw %}{{ team }}{% endraw %}'
+      namespace: openshift-gitops
+      finalizers:
+      - resources-finalizer.argocd.argoproj.io
+    spec:
+      project: default
+      source:
+        repoURL: {{ ocp4_workload_platform_engineering_workshop_showroom_deployer_gitops_repo }}
+        targetRevision: {{ ocp4_workload_platform_engineering_workshop_showroom_deployer_gitops_repo_tag }}
+        path: {{ ocp4_workload_platform_engineering_workshop_showroom_deployer_gitops_repo_path }}
+        helm:
+          parameters:
+          - name: "deployer.domain"
+            value: "{{ r_openshift_subdomain }}"
+          - name: "guid"
+            value: "{{ guid }}"
+          - name: "content.repoUrl"
+            value: "{{ ocp4_workload_platform_engineering_workshop_showroom_deployer_content_repo_url }}"
+          - name: "content.repoRef"
+            value: "{{ ocp4_workload_platform_engineering_workshop_showroom_deployer_content_repo_ref }}"
+          - name: "wetty.ssh.autoSshToBastion"
+            value: "{{ ocp4_workload_platform_engineering_workshop_showroom_deployer_wetty_auto_ssh }}"
+          - name: "wetty.ssh.sshHost"
+            value: "{{ ocp4_workload_platform_engineering_workshop_showroom_deployer_wetty_ssh_host }}"
+          - name: "wetty.ssh.sshPort"
+            value: "{{ ocp4_workload_platform_engineering_workshop_showroom_deployer_wetty_ssh_port }}"
+          - name: "wetty.ssh.sshUser"
+            value: "{{ ocp4_workload_platform_engineering_workshop_showroom_deployer_wetty_ssh_user }}"
+          - name: "wetty.ssh.sshAuth"
+            value: "{{ ocp4_workload_platform_engineering_workshop_showroom_deployer_wetty_ssh_auth }}"
+          - name: "wetty.ssh.sshPass"
+            value: "{{ ocp4_workload_platform_engineering_workshop_showroom_deployer_wetty_ssh_pass }}"
+          - name: "content.user_data"
+            value: |
+              bastion_password: {{ common_password }}
+              openshift_cluster_ingress_domain: {{ r_openshift_subdomain }}
+              common_password: See the hero card password
+              team-id: {% raw %}{{ team }}{% endraw %}
+              user1: {% raw %}{{ user1 }}{% endraw %}
+              user2: {% raw %}{{ user2 }}{% endraw %}
+              user3: {% raw %}{{ user3 }}{% endraw %}
+              openai-url: {{ ocp4_worklod_platform_engineering_workshop_opencodequest_openai_url }}
+              openai-model: {{ ocp4_worklod_platform_engineering_workshop_opencodequest_openai_model }}
+              openai-key: {{ ocp4_worklod_platform_engineering_workshop_opencodequest_openai_key }}
+              environment_variables:
+                TEAM_ID: {% raw %}{{ team }}{% endraw %}
+                DOMAIN: {{ r_openshift_subdomain }}
+
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: '{{ ocp4_workload_platform_engineering_workshop_showroom_deployer_application_name }}-{% raw %}{{ team }}{% endraw %}'
+      syncPolicy:
+        automated:
+          prune: false
+          selfHeal: false
+        syncOptions:
+        - CreateNamespace=true
+        - RespectIgnoreDifferences=true
+        - ApplyOutOfSyncOnly=true
